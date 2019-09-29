@@ -14,7 +14,7 @@ namespace eBiblioteka.WebAPI.Database
         public string Naziv { get; set; }
         public int? GradId { get; set; }
 
-        public Grad Grad { get; set; }
-        public ICollection<Knjiga> Knjiga { get; set; }
+        public virtual Grad Grad { get; set; }
+        public virtual ICollection<Knjiga> Knjiga { get; set; }
     }
 }

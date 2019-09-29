@@ -14,6 +14,6 @@ namespace eBiblioteka.WebAPI.Database
         public string Naziv { get; set; }
         public string Skracenica { get; set; }
 
-        public ICollection<Grad> Grad { get; set; }
+        public virtual ICollection<Grad> Grad { get; set; }
     }
 }

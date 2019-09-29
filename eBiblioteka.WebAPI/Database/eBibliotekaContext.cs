@@ -15,32 +15,33 @@ namespace eBiblioteka.WebAPI.Database
         {
         }
 
-        public virtual DbSet<Biblioteka> Biblioteka { get; set; }
-        public virtual DbSet<Clan> Clan { get; set; }
-        public virtual DbSet<Clanarina> Clanarina { get; set; }
-        public virtual DbSet<Drzava> Drzava { get; set; }
-        public virtual DbSet<Grad> Grad { get; set; }
-        public virtual DbSet<Izdavac> Izdavac { get; set; }
-        public virtual DbSet<Jezik> Jezik { get; set; }
-        public virtual DbSet<Knjiga> Knjiga { get; set; }
-        public virtual DbSet<KnjigaIzdavanje> KnjigaIzdavanje { get; set; }
-        public virtual DbSet<KnjigaPisac> KnjigaPisac { get; set; }
-        public virtual DbSet<KnjigaRezervacija> KnjigaRezervacija { get; set; }
-        public virtual DbSet<KnjigaZanr> KnjigaZanr { get; set; }
-        public virtual DbSet<Korisnik> Korisnik { get; set; }
-        public virtual DbSet<KorisnikRola> KorisnikRola { get; set; }
-        public virtual DbSet<Osoba> Osoba { get; set; }
-        public virtual DbSet<Pisac> Pisac { get; set; }
-        public virtual DbSet<Rola> Rola { get; set; }
-        public virtual DbSet<Uposlenik> Uposlenik { get; set; }
-        public virtual DbSet<Zanr> Zanr { get; set; }
+        public DbSet<Biblioteka> Biblioteka { get; set; }
+        public DbSet<Clan> Clan { get; set; }
+        public DbSet<Clanarina> Clanarina { get; set; }
+        public DbSet<Drzava> Drzava { get; set; }
+        public DbSet<Grad> Grad { get; set; }
+        public DbSet<Izdavac> Izdavac { get; set; }
+        public DbSet<Jezik> Jezik { get; set; }
+        public DbSet<Knjiga> Knjiga { get; set; }
+        public DbSet<KnjigaIzdavanje> KnjigaIzdavanje { get; set; }
+        public DbSet<KnjigaPisac> KnjigaPisac { get; set; }
+        public DbSet<KnjigaRezervacija> KnjigaRezervacija { get; set; }
+        public DbSet<KnjigaZanr> KnjigaZanr { get; set; }
+        public DbSet<Korisnik> Korisnik { get; set; }
+        public DbSet<KorisnikRola> KorisnikRola { get; set; }
+        public DbSet<Osoba> Osoba { get; set; }
+        public DbSet<Pisac> Pisac { get; set; }
+        public DbSet<Rola> Rola { get; set; }
+        public DbSet<Tip> Tip { get; set; }
+        public DbSet<Uposlenik> Uposlenik { get; set; }
+        public DbSet<Zanr> Zanr { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.;Database=eBiblioteka;Trusted_Connection=True;");
+                base.OnConfiguring(optionsBuilder);
+
             }
         }
 
@@ -60,11 +61,19 @@ namespace eBiblioteka.WebAPI.Database
 
                 entity.Property(e => e.GradId).HasColumnName("GradID");
 
+                entity.Property(e => e.TipId).HasColumnName("TipID");
+
+
                 entity.Property(e => e.LatLong).HasMaxLength(50);
 
                 entity.Property(e => e.Naziv)
                     .IsRequired()
                     .HasMaxLength(75);
+
+                entity.HasOne(d => d.Tip)
+                    .WithMany(p => p.Biblioteka)
+                    .HasForeignKey(d => d.TipId)
+                    .HasConstraintName("FK_Biblioteka_Tip");
 
                 entity.HasOne(d => d.Grad)
                     .WithMany(p => p.Biblioteka)
@@ -205,17 +214,17 @@ namespace eBiblioteka.WebAPI.Database
                 entity.HasOne(d => d.Biblioteka)
                     .WithMany(p => p.Knjiga)
                     .HasForeignKey(d => d.BibliotekaId)
-                    .HasConstraintName("FK__Knjiga__Bibliote__5BE2A6F2");
+                    .HasConstraintName("FK__Knjiga__Bibliote__0B91BA14");
 
                 entity.HasOne(d => d.Izdavac)
                     .WithMany(p => p.Knjiga)
                     .HasForeignKey(d => d.IzdavacId)
-                    .HasConstraintName("FK__Knjiga__IzdavacI__5AEE82B9");
+                    .HasConstraintName("FK__Knjiga__IzdavacI__0C85DE4D");
 
                 entity.HasOne(d => d.Jazik)
                     .WithMany(p => p.Knjiga)
                     .HasForeignKey(d => d.JazikId)
-                    .HasConstraintName("FK__Knjiga__JazikID__5CD6CB2B");
+                    .HasConstraintName("FK__Knjiga__JazikID__0D7A0286");
             });
 
             modelBuilder.Entity<KnjigaIzdavanje>(entity =>
@@ -240,7 +249,7 @@ namespace eBiblioteka.WebAPI.Database
                 entity.HasOne(d => d.Knjiga)
                     .WithMany(p => p.KnjigaIzdavanje)
                     .HasForeignKey(d => d.KnjigaId)
-                    .HasConstraintName("FK__KnjigaIzd__Knjig__6B24EA82");
+                    .HasConstraintName("FK_KnjigaIzdavanje_Knjiga");
             });
 
             modelBuilder.Entity<KnjigaPisac>(entity =>
@@ -255,13 +264,13 @@ namespace eBiblioteka.WebAPI.Database
                     .WithMany(p => p.KnjigaPisac)
                     .HasForeignKey(d => d.KnjigaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__KnjigaPis__Knjig__619B8048");
+                    .HasConstraintName("FK_KnjigaPisac_Knjiga");
 
                 entity.HasOne(d => d.Pisac)
                     .WithMany(p => p.KnjigaPisac)
                     .HasForeignKey(d => d.PisacId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__KnjigaPis__Pisac__628FA481");
+                    .HasConstraintName("FK_KnjigaPisac_Pisac");
             });
 
             modelBuilder.Entity<KnjigaRezervacija>(entity =>
@@ -284,7 +293,7 @@ namespace eBiblioteka.WebAPI.Database
                 entity.HasOne(d => d.Knjiga)
                     .WithMany(p => p.KnjigaRezervacija)
                     .HasForeignKey(d => d.KnjigaId)
-                    .HasConstraintName("FK__KnjigaRez__Knjig__6EF57B66");
+                    .HasConstraintName("FK_KnjigaRezervacija_Knjiga");
             });
 
             modelBuilder.Entity<KnjigaZanr>(entity =>
@@ -299,7 +308,7 @@ namespace eBiblioteka.WebAPI.Database
                     .WithMany(p => p.KnjigaZanr)
                     .HasForeignKey(d => d.KnjigaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__KnjigaZan__Knjig__6754599E");
+                    .HasConstraintName("FK_KnjigaZanr_Knjiga");
 
                 entity.HasOne(d => d.Zanr)
                     .WithMany(p => p.KnjigaZanr)
@@ -319,6 +328,8 @@ namespace eBiblioteka.WebAPI.Database
                 entity.Property(e => e.KorisnickaSifraHash)
                     .IsRequired()
                     .HasMaxLength(200);
+                entity.Property(e => e.Token)
+                    .IsRequired();
 
                 entity.Property(e => e.KorisnickoIme)
                     .IsRequired()
@@ -356,12 +367,16 @@ namespace eBiblioteka.WebAPI.Database
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__KorisnikR__Koris__47DBAE45");
 
+
+
                 entity.HasOne(d => d.Rola)
                     .WithMany(p => p.KorisnikRola)
                     .HasForeignKey(d => d.RolaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__KorisnikR__RolaI__46E78A0C");
             });
+
+
 
             modelBuilder.Entity<Osoba>(entity =>
             {
@@ -411,7 +426,6 @@ namespace eBiblioteka.WebAPI.Database
             modelBuilder.Entity<Rola>(entity =>
             {
                 entity.Property(e => e.RolaId).HasColumnName("RolaID");
-
                 entity.Property(e => e.Naziv)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -440,6 +454,17 @@ namespace eBiblioteka.WebAPI.Database
                     .WithMany(p => p.Uposlenik)
                     .HasForeignKey(d => d.OsobaId)
                     .HasConstraintName("FK__Uposlenik__Osoba__52593CB8");
+            });
+
+            modelBuilder.Entity<Tip>(entity =>
+            {
+                entity.Property(e => e.TipId).HasColumnName("TipID");
+                entity.Property(e => e.Icona).HasMaxLength(50);
+
+
+                entity.Property(e => e.Naziv)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Zanr>(entity =>

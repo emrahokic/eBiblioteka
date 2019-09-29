@@ -1,0 +1,126 @@
+﻿<UserControl x:Class="eBiblioteka.DesktopWPF.Views.AddLibrary"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:local="clr-namespace:eBiblioteka.DesktopWPF.Views"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="512" d:DesignWidth="800" MinWidth="700">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel>
+                <Grid x:Name="RootHome" Margin="80 25 80 50 " >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:Card UniformCornerRadius="10" Padding="20" MaxWidth="800">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="292*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Margin="30 20 0 0" Grid.Row="0" Orientation="Vertical">
+                                <TextBlock  FontSize="25" Foreground="#FF444444">Add Library</TextBlock>
+
+                            </StackPanel>
+                            <WrapPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="0" Width="Auto" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+
+                                <StackPanel  Margin="0 20 20 0"  HorizontalAlignment="Stretch" >
+
+                                    <TextBox MaxLines="2"  MaxLength="100"  Text="{Binding  LibraryName,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Name of Librairy" 
+                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
+                                              Foreground="Black" Width="300" CaretBrush="Black" HorizontalAlignment="Stretch"  SelectionBrush="White" Margin="30 30 0 0"/>
+                                    <TextBox  MaxLines="2" MaxLength="100" Text="{Binding  Address,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Address" 
+                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
+                                              Foreground="Black" Width="300" CaretBrush="Black"   SelectionBrush="White" Margin="30 30 0 0"/>
+                                    <!--DropBox-->
+
+                                    <ComboBox ItemsSource="{Binding Types}" Width="300"
+                                               BorderBrush="#FFFFDBBA"
+                                              IsEnabled="{Binding TypesIsEnabled}"
+                                              SelectedItem="{Binding SelectedItemType}"
+                                        materialDesign:HintAssist.Hint="Type"
+                                        FontSize="14"
+                                        Margin="30 30 0 0"/>
+
+
+
+                                    <TextBox MaxLines="1" MaxLength="50"  Text="{Binding  PhoneNumber,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Phone Number" 
+                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
+                                              Foreground="Black" Width="300" CaretBrush="Black"  SelectionBrush="White" Margin="30 30 0 0"/>
+                                    <!--DropBox-->
+
+                                    <ComboBox ItemsSource="{Binding Countries}"
+                                              IsEnabled="{Binding CountriesIsEnabled}"
+                                               BorderBrush="#FFFFDBBA"
+                                              SelectedItem="{Binding SelectedItemCountry}"
+                                        materialDesign:HintAssist.Hint="Country"
+                                        FontSize="14" Width="300"
+                                        Margin="30 30 0 0"/>
+
+                                    <ComboBox ItemsSource="{Binding Cities}"
+                                              IsEnabled="{Binding CitiesIsEnabled}"
+                                               BorderBrush="#FFFFDBBA"
+                                              SelectedItem="{Binding SelectedItemCity}"
+                                        materialDesign:HintAssist.Hint="City"
+                                        FontSize="14" Width="300"
+                                        Margin="30 30 0 0"/>
+                                    <TextBox  MaxLines="2" MaxLength="80" Text="{Binding  GPSCoordinates,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="GPS Coordinates" 
+                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
+                                              Foreground="Black" Width="300"  CaretBrush="Black"  SelectionBrush="White" Margin="30 30 0 30"/>
+
+
+                                </StackPanel>
+                                <StackPanel Margin="0 20 20 0" HorizontalAlignment="Stretch" >
+
+                                    <TextBox  MaxLines="2" MaxLength="50" Text="{Binding  Email,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Email" 
+                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
+                                              Foreground="Black" Width="300"  CaretBrush="Black"  SelectionBrush="White" Margin="30 30 0 0"/>
+                                    <TextBox   Width="300" Text="{Binding  Opis,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" materialDesign:HintAssist.Hint="Info/About" 
+                                              MaxLines="10" MaxLength="300"
+                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
+                                              Foreground="Black"  CaretBrush="Black"  SelectionBrush="White" Margin="30 30 0 0"/>
+                                    <TextBlock Margin="30 5 0 0" FontSize="11" Foreground="Gray" HorizontalAlignment="Right" Text="{Binding LeftMoreInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></TextBlock>
+                                    
+
+                                </StackPanel>
+
+                            </WrapPanel>
+
+                            <Border CornerRadius="20" Grid.Row="2"  Width="150" Height="40"  Margin="0 25 0 0"  >
+                                <Border.Background>
+
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#E3A872" Offset="0.0"></GradientStop>
+                                        <GradientStop Color="#E2D0B7" Offset="1.0"></GradientStop>
+
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.Effect>
+
+                                    <DropShadowEffect Opacity="0.3" BlurRadius="5" ShadowDepth="2"/>
+                                </Border.Effect>
+
+                                <Button Background="Transparent" BorderThickness="0" Height="Auto" SnapsToDevicePixels="True"  Command="{Binding CreateCommand}">
+                                
+                               
+                                
+                                <TextBlock FontSize="17" Foreground="White">Create</TextBlock>
+                            </Button>
+                            </Border>
+                        </Grid>
+
+                    </materialDesign:Card>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

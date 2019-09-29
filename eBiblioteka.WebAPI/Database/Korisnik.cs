@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace eBiblioteka.WebAPI.Database
 {
-    public partial class Korisnik
+    public partial class Korisnik 
     {
         public Korisnik()
         {
@@ -19,7 +20,8 @@ namespace eBiblioteka.WebAPI.Database
         public string Slika { get; set; }
         public int? OsobaId { get; set; }
 
-        public Osoba Osoba { get; set; }
-        public ICollection<KorisnikRola> KorisnikRola { get; set; }
+        public virtual Osoba Osoba { get; set; }
+        public virtual ICollection<KorisnikRola> KorisnikRola { get; set; }
+        public string Token { get; internal set; }
     }
 }

@@ -17,6 +17,6 @@ namespace eBiblioteka.WebAPI.Database
         public DateTime? GodinaSmrti { get; set; }
         public string Slika { get; set; }
 
-        public ICollection<KnjigaPisac> KnjigaPisac { get; set; }
+        public virtual ICollection<KnjigaPisac> KnjigaPisac { get; set; }
     }
 }

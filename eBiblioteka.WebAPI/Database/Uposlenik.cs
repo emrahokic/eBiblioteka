@@ -12,7 +12,7 @@ namespace eBiblioteka.WebAPI.Database
         public int? Aktivan { get; set; }
         public string BrojRadnika { get; set; }
 
-        public Biblioteka Biblioteka { get; set; }
-        public Osoba Osoba { get; set; }
+        public virtual Biblioteka Biblioteka { get; set; }
+        public virtual Osoba Osoba { get; set; }
     }
 }

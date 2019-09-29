@@ -8,7 +8,7 @@ namespace eBiblioteka.WebAPI.Database
         public int KnjigaId { get; set; }
         public int PisacId { get; set; }
 
-        public Knjiga Knjiga { get; set; }
-        public Pisac Pisac { get; set; }
+        public virtual Knjiga Knjiga { get; set; }
+        public virtual Pisac Pisac { get; set; }
     }
 }

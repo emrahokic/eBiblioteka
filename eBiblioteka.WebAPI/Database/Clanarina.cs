@@ -12,7 +12,7 @@ namespace eBiblioteka.WebAPI.Database
         public DateTime DatumIsteka { get; set; }
         public decimal Iznos { get; set; }
 
-        public Biblioteka Biblioteka { get; set; }
-        public Clan Clan { get; set; }
+        public virtual Biblioteka Biblioteka { get; set; }
+        public virtual Clan Clan { get; set; }
     }
 }

@@ -24,12 +24,12 @@ namespace eBiblioteka.WebAPI.Database
         public int? Stranice { get; set; }
         public int? JazikId { get; set; }
 
-        public Biblioteka Biblioteka { get; set; }
-        public Izdavac Izdavac { get; set; }
-        public Jezik Jazik { get; set; }
-        public ICollection<KnjigaIzdavanje> KnjigaIzdavanje { get; set; }
-        public ICollection<KnjigaPisac> KnjigaPisac { get; set; }
-        public ICollection<KnjigaRezervacija> KnjigaRezervacija { get; set; }
-        public ICollection<KnjigaZanr> KnjigaZanr { get; set; }
+        public virtual Biblioteka Biblioteka { get; set; }
+        public virtual Izdavac Izdavac { get; set; }
+        public virtual Jezik Jazik { get; set; }
+        public virtual ICollection<KnjigaIzdavanje> KnjigaIzdavanje { get; set; }
+        public virtual ICollection<KnjigaPisac> KnjigaPisac { get; set; }
+        public virtual ICollection<KnjigaRezervacija> KnjigaRezervacija { get; set; }
+        public virtual ICollection<KnjigaZanr> KnjigaZanr { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace eBiblioteka.WebAPI.Database
         public int JezikId { get; set; }
         public string Naziv { get; set; }
 
-        public ICollection<Knjiga> Knjiga { get; set; }
+        public virtual ICollection<Knjiga> Knjiga { get; set; }
     }
 }

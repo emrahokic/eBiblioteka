@@ -11,7 +11,7 @@ namespace eBiblioteka.WebAPI.Database
         public DateTime DatumPreuzimanja { get; set; }
         public DateTime? DatumPovratka { get; set; }
 
-        public Clan Clan { get; set; }
-        public Knjiga Knjiga { get; set; }
+        public virtual Clan Clan { get; set; }
+        public virtual Knjiga Knjiga { get; set; }
     }
 }

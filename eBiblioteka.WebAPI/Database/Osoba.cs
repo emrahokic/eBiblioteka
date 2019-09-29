@@ -20,9 +20,9 @@ namespace eBiblioteka.WebAPI.Database
         public string Jmbg { get; set; }
         public int? Spol { get; set; }
 
-        public Grad Grad { get; set; }
-        public ICollection<Clan> Clan { get; set; }
-        public ICollection<Korisnik> Korisnik { get; set; }
-        public ICollection<Uposlenik> Uposlenik { get; set; }
+        public virtual Grad Grad { get; set; }
+        public virtual ICollection<Clan> Clan { get; set; }
+        public virtual ICollection<Korisnik> Korisnik { get; set; }
+        public virtual ICollection<Uposlenik> Uposlenik { get; set; }
     }
 }
