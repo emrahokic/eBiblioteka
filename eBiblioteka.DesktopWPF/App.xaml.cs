@@ -22,6 +22,8 @@ namespace eBiblioteka.DesktopWPF
             {
                 DataContext = new LoginViewModel()
             };
+
+            //Test
             window.ShowDialog();
            
         }
