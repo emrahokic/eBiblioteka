@@ -23,7 +23,7 @@ namespace eBiblioteka.DesktopWPF
                 DataContext = new LoginViewModel()
             };
 
-            //ff
+            //Test
             window.ShowDialog();
            
         }
