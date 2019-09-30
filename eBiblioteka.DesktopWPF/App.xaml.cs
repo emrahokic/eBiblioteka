@@ -24,6 +24,8 @@ namespace eBiblioteka.DesktopWPF
             };
 
             //Test
+
+            //Master
             window.ShowDialog();
            
         }
