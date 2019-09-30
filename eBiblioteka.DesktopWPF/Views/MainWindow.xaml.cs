@@ -1,4 +1,5 @@
 ﻿using eBiblioteka.DesktopWPF.Helper;
+using Prism.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace eBiblioteka.DesktopWPF.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static  MainWindow _mainWindowsInstance;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace eBiblioteka.DesktopWPF.Views
         {
             this.WindowState = WindowState.Minimized;
         }
-     
+
 
         private void Drag(object sender, RoutedEventArgs e)
         {
@@ -85,6 +87,8 @@ namespace eBiblioteka.DesktopWPF.Views
 
 
         }
+
+    
         private void MoveCursorMenu(int index)
         {
             TrainsitioningContentSlide.OnApplyTemplate();

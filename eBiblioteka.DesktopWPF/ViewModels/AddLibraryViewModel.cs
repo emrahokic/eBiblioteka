@@ -1,4 +1,5 @@
-﻿using eBiblioteka.Model.Requests;
+﻿using eBiblioteka.DesktopWPF.Views;
+using eBiblioteka.Model.Requests;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -8,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -227,7 +229,22 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
         private async void CreateLibrary()
         {
+          
             var result = await _apiLibraries.Insert<Model.Biblioteka>(_bibliotekaInsert);
+            if (result!=null)
+            {
+                this.Address = "";
+                this.Email = "";
+                this.LibraryName = "";
+                this.Opis = "";
+                this.GPSCoordinates = "";
+                this.PhoneNumber = "";
+                MessageBox.Show("Library is successuful added!");
+                return;
+
+            }
+            MessageBox.Show("Something went worng");
+
         }
 
         private bool CanExecute()
@@ -259,6 +276,8 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             Countries = new ObservableCollection<ComboBoxItem>();
             GetTip();
             GetCountries();
+
+            
         }
     }
 }

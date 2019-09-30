@@ -69,7 +69,7 @@
                                     <ComboBox ItemsSource="{Binding Cities}"
                                               IsEnabled="{Binding CitiesIsEnabled}"
                                                BorderBrush="#FFFFDBBA"
-                                              SelectedItem="{Binding SelectedItemCity}"
+                                              SelectedItem="{Binding SelectedItemCity, Mode=TwoWay}"
                                         materialDesign:HintAssist.Hint="City"
                                         FontSize="14" Width="300"
                                         Margin="30 30 0 0"/>
