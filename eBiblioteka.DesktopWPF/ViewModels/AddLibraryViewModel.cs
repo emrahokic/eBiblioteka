@@ -231,7 +231,7 @@ namespace eBiblioteka.DesktopWPF.ViewModels
         {
           
             var result = await _apiLibraries.Insert<Model.Biblioteka>(_bibliotekaInsert);
-            if (result!=null)
+            if (result != null)
             {
                 this.Address = "";
                 this.Email = "";
@@ -241,10 +241,8 @@ namespace eBiblioteka.DesktopWPF.ViewModels
                 this.PhoneNumber = "";
                 MessageBox.Show("Library is successuful added!");
                 return;
-
             }
             MessageBox.Show("Something went worng");
-
         }
 
         private bool CanExecute()
