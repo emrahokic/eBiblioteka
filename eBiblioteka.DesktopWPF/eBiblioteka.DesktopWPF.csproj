@@ -154,11 +154,15 @@
     </Compile>
     <Compile Include="Helper\Stringovi.cs" />
     <Compile Include="ViewModels\AddLibraryViewModel.cs" />
+    <Compile Include="ViewModels\AddPublisherViewModel.cs" />
     <Compile Include="ViewModels\LibrariesViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\AddLibrary.xaml.cs">
       <DependentUpon>AddLibrary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddPublisher.xaml.cs">
+      <DependentUpon>AddPublisher.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Libraries.xaml.cs">
       <DependentUpon>Libraries.xaml</DependentUpon>
@@ -213,6 +217,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AddLibrary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddPublisher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

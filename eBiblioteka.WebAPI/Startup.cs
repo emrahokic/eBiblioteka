@@ -97,6 +97,7 @@ namespace eBiblioteka.WebAPI
             //services interface
             services.AddScoped<ICRUDService<Model.Grad, GradSearchRequest, GradUpsertRequest, GradUpsertRequest>, GradService>();
             services.AddScoped<ICRUDService<Model.Biblioteka, BibliotekaSearchRequest, BibliotekaInsertRequest, BibliotekaInsertRequest>, BibliotekaService>();
+            services.AddScoped<ICRUDService<Model.Izdavac, IzdavacSearchRequest, IzdavacInsertRequest, IzdavacInsertRequest>, IzdavacService>();
             services.AddScoped<IService<Model.Drzava, Model.Drzava>, DrzavaService>();
             services.AddScoped<IService<Model.Tip, Model.Tip>, TipService>();
             services.AddScoped<IKorisnikService, KorisnikService>();

@@ -17,6 +17,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
+                
                 <ListBox  ItemsSource="{Binding Libraries}">
                     <ListBox.ItemContainerStyle>
                            
