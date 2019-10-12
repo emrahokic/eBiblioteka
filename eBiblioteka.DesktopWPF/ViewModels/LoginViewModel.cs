@@ -20,7 +20,7 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 {
     public class LoginViewModel : BindableBase
     {
-        private readonly APIService _auth = new APIService("Korisnik/Authenticate");
+        private readonly APIService _auth = new APIService("Korisnik/Auth");
 
 
         private string _email;

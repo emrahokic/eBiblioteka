@@ -14,13 +14,13 @@ namespace eBiblioteka.WebAPI.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<T,TSearch> : ControllerBase
+    public class BaseController<T, TSearch> : ControllerBase
     {
         private readonly IKorisnikService _korisnikService;
-        private  UserIdentity _user;
+        private UserIdentity _user;
         private readonly IService<T, TSearch> _service;
 
-        public BaseController(IService<T,TSearch> service, IKorisnikService korisnikService)
+        public BaseController(IService<T, TSearch> service, IKorisnikService korisnikService)
         {
             _korisnikService = korisnikService;
             _service = service;
@@ -34,6 +34,8 @@ namespace eBiblioteka.WebAPI.Controllers
 
             return _service.Get(search,_user);
         }
+
+
 
         [HttpGet("{id}")]
         public virtual T GetById(int id)

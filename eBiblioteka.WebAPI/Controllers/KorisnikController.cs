@@ -27,8 +27,8 @@ namespace eBiblioteka.WebAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("Authenticate")]
-        public ActionResult<Model.Korisnik> Authenticate()
+        [HttpGet("Auth")]
+        public ActionResult<Model.Korisnik> Auth()
         {
             
             if(!Request.Headers.ContainsKey("Authorization"))

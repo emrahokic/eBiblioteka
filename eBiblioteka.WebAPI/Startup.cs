@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -60,7 +61,7 @@ namespace eBiblioteka.WebAPI
                 {
                     {"basic", new string[] { }},
                 };
-                
+
                 c.AddSecurityDefinition("basic", new BasicAuthScheme() { Type = "basic" });
                 c.AddSecurityRequirement(security);
 
@@ -93,7 +94,7 @@ namespace eBiblioteka.WebAPI
                     ClockSkew = TimeSpan.Zero
                 };
             });
-         
+
             //services interface
             services.AddScoped<ICRUDService<Model.Grad, GradSearchRequest, GradUpsertRequest, GradUpsertRequest>, GradService>();
             services.AddScoped<ICRUDService<Model.Biblioteka, BibliotekaSearchRequest, BibliotekaInsertRequest, BibliotekaInsertRequest>, BibliotekaService>();
@@ -101,9 +102,13 @@ namespace eBiblioteka.WebAPI
             services.AddScoped<IService<Model.Tip, Model.Tip>, TipService>();
             services.AddScoped<IKorisnikService, KorisnikService>();
             //db conection
-            var connection = Configuration.GetConnectionString("MyConnectionString");
+            var connection = Configuration.GetConnectionString("local");
 
             services.AddDbContext<eBibliotekaContext>(options => options.UseSqlServer(connection));
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -133,8 +138,28 @@ namespace eBiblioteka.WebAPI
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
+           
+
             app.UseAuthentication();
-            app.UseMvc();
+
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
+            });
         }
     }
 }

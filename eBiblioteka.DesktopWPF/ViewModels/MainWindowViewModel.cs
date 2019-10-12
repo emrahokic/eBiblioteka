@@ -59,8 +59,8 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             }
             else if (APIService.Session.Role.Contains("Admin"))
             {
-                navlist.Add(new NavbarItem() { Name = "Publishers", TextStyle = "Bold" });
-                navlist.Add(new NavbarItem() { Name = "  Add Publisher", TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Publishers, TextStyle = "Bold" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddPublisher, TextStyle = "Regular" });
                 navlist.Add(new NavbarItem() { Name = "Authors", TextStyle = "Bold" });
                 navlist.Add(new NavbarItem() { Name = "  Add Author", TextStyle = "Regular" });
                 navlist.Add(new NavbarItem() { Name = "Books", TextStyle = "Bold" });
