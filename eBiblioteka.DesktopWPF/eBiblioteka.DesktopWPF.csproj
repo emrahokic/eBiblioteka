@@ -158,6 +158,9 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PublishersViewModel.cs" />
+    <Compile Include="Views\AddAuthor.xaml.cs">
+      <DependentUpon>AddAuthor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddLibrary.xaml.cs">
       <DependentUpon>AddLibrary.xaml</DependentUpon>
     </Compile>
@@ -216,6 +219,10 @@
     <SplashScreen Include="Views\SplashScrean – 2.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddAuthor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\AddLibrary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
