@@ -1,0 +1,76 @@
+﻿.navbar li .glyphicon {
+    margin-right: 10px;
+}
+
+/* Highlighting rules for nav menu items */
+.navbar .navbar-nav .active a,
+.navbar .navbar-nav .active a:hover,
+.navbar .navbar-nav .active a:focus {
+    background-image: none;
+    margin-left:0;
+    background-color: #E3A670;
+    color: white !important;
+}
+.navbar .navbar-nav a {
+    background-image: none;
+    font-size: 1.2em;
+    color: dimgrey !important;
+}
+@media (min-width: 768px) {
+    /* On large screens, convert the nav menu to a vertical sidebar */
+    .navbar {
+        height: 100%;
+        width: calc(25% - 20px);
+        background-position: center;
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/egym2019.appspot.com/o/Group%2024.png?alt=media&token=d6ac4b60-49c6-4d5f-8cfe-836c7cb607f0");
+    }
+        .navbar .navbar-nav a {
+            background-image: none;
+            font-size: 1.2em;
+            color: white !important;
+        }
+    .navbar {
+        border-radius: 0;
+        border-width: 0;
+        height: 100%;
+    }
+    .navbar-header {
+        float: none;
+    } 
+    
+    .navbar-header a{
+        text-align:center;
+        font-size:1.8em;
+        color:white !important;
+    }
+    .navbar .navbar-collapse {
+        padding: 0;
+    }
+    .navbar .container-fluid {
+        padding: 0;
+        margin: 0;
+    }
+    .navbar .container-fluid .navbar-brand {
+        margin: 0;
+    }
+    .navbar ul {
+        float: none;
+    }
+    .navbar li {
+        float: none;
+        font-size: 15px;
+        margin: 6px;
+    }
+    .navbar li a {
+        padding: 10px 16px;
+        border-radius: 4px;
+    }
+    .navbar a {
+        /* If a menu item's text is too long, truncate it */
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+   
+}

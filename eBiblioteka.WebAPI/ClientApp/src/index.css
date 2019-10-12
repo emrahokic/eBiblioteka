@@ -1,0 +1,27 @@
+@media (max-width: 767px) {
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    body {
+
+        padding-top: 50px;
+        
+    }
+}
+
+.kartica {
+    background-color: white;
+    border-radius: 4px;
+    border-left: 3px solid #409AB2;
+    padding: 20px 20px 20px 15px;
+    -webkit-box-shadow: 1px 5px 13px -5px rgba(0,0,0,0.63);
+    -moz-box-shadow: 1px 5px 13px -5px rgba(0,0,0,0.63);
+    box-shadow: 1px 5px 13px -5px rgba(0,0,0,0.63);
+}
+
+code {
+    font-family: Courier New !important;
+    background-color: lightgray;
+    padding: 5px;
+    color: slategray;
+
+
+}
