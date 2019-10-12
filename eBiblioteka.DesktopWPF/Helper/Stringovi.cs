@@ -6,6 +6,8 @@
         public const string Libraries = "Libraries";
         public const string Publishers = "Publishers";
         public const string AddPublisher = "  Add Publisher";
+        public const string AddAuthor= "  Add Author";
+        public const string Authors= "Authors";
         public const string Home = "Home";
 
     }
