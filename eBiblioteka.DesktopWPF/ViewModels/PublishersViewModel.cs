@@ -46,7 +46,7 @@ namespace eBiblioteka.DesktopWPF.ViewModels
         {
             Libraries = new ObservableCollection<Publisher>();
             GetLibraries();
-
+            //gg
         }
         
     }
