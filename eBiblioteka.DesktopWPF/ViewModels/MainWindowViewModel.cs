@@ -61,8 +61,8 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             {
                 navlist.Add(new NavbarItem() { Name = Stringovi.Publishers, TextStyle = "Bold" });
                 navlist.Add(new NavbarItem() { Name = Stringovi.AddPublisher, TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "Authors", TextStyle = "Bold" });
-                navlist.Add(new NavbarItem() { Name = "  Add Author", TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Authors, TextStyle = "Bold" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddAuthor, TextStyle = "Regular" });
                 navlist.Add(new NavbarItem() { Name = "Books", TextStyle = "Bold" });
                 navlist.Add(new NavbarItem() { Name = "  Add Book", TextStyle = "Regular" });
                 navlist.Add(new NavbarItem() { Name = "  Reservations", TextStyle = "Regular" });
