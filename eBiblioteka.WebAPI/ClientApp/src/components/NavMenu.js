@@ -1,0 +1,47 @@
+﻿import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import './NavMenu.css';
+
+export class NavMenu extends Component {
+    displayName = NavMenu.name
+
+    render() {
+        return (
+            <Navbar  fixedTop fluid collapseOnSelect>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <Link to={'/'}>eBiblioteka</Link>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav>
+                        <LinkContainer to={'/'} exact>
+                            <NavItem>
+                                <Glyphicon glyph='home' /> Home
+                            </NavItem>
+                        </LinkContainer>
+                        <LinkContainer to={'/counter'}>
+                            <NavItem>
+                                <Glyphicon glyph='education' /> Desktop App
+                            </NavItem>
+                        </LinkContainer>
+                        <LinkContainer to={'/fetchdata'}>
+                            <NavItem>
+                                <Glyphicon glyph='list' /> Mobile App
+                            </NavItem>
+                        </LinkContainer>
+                        <LinkContainer to={'/swagger_api'}>
+                            <NavItem>
+                                <Glyphicon glyph='transfer' /> Swagger
+                            </NavItem>
+                        </LinkContainer>
+
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        );
+    }
+}
