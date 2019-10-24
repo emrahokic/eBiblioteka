@@ -99,11 +99,13 @@ namespace eBiblioteka.WebAPI
             services.AddScoped<ICRUDService<Model.Grad, GradSearchRequest, GradUpsertRequest, GradUpsertRequest>, GradService>();
             services.AddScoped<ICRUDService<Model.Biblioteka, BibliotekaSearchRequest, BibliotekaInsertRequest, BibliotekaInsertRequest>, BibliotekaService>();
             services.AddScoped<ICRUDService<Model.Izdavac, IzdavacSearchRequest, IzdavacInsertRequest, IzdavacInsertRequest>, IzdavacService>();
+            services.AddScoped<ICRUDService<Model.Pisac, PisacSearchRequest, PisacInsertRequest, PisacInsertRequest>, PisacService>();
             services.AddScoped<IService<Model.Drzava, Model.Drzava>, DrzavaService>();
             services.AddScoped<IService<Model.Tip, Model.Tip>, TipService>();
             services.AddScoped<IKorisnikService, KorisnikService>();
             //db conection
-            var connection = Configuration.GetConnectionString("local");
+            var connection = Configuration.GetConnectionString("localDev");
+           
 
             services.AddDbContext<eBibliotekaContext>(options => options.UseSqlServer(connection));
             services.AddSpaStaticFiles(configuration =>
@@ -139,7 +141,7 @@ namespace eBiblioteka.WebAPI
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-           
+
 
             app.UseAuthentication();
 

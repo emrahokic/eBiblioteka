@@ -20,6 +20,7 @@ namespace eBiblioteka.WebAPI.Database
         public int? Spol { get; set; }
 
         public string Slika { get; set; }
+        public byte[] SlikaByte { get; set; }
 
         public virtual ICollection<KnjigaPisac> KnjigaPisac { get; set; }
     }

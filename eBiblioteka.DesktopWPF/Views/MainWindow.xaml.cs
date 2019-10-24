@@ -91,6 +91,11 @@ namespace eBiblioteka.DesktopWPF.Views
                         G_root.Children.Clear();
                         G_root.Children.Add(new AddPublisher());
                     } break;
+                case Stringovi.AddAuthor:
+                    {
+                        G_root.Children.Clear();
+                        G_root.Children.Add(new AddAuthor());
+                    } break;
                 default: { } break;
             }
 

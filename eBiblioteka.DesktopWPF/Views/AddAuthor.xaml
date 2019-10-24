@@ -28,31 +28,46 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <StackPanel Margin="30 20 0 0" Grid.Row="0" Orientation="Vertical">
-                                <TextBlock  FontSize="25" Foreground="#FF444444">Add Library</TextBlock>
+                                <TextBlock  FontSize="25" Foreground="#FF444444">Add Author</TextBlock>
 
                             </StackPanel>
                             <WrapPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="0" Width="Auto" Grid.ColumnSpan="2" HorizontalAlignment="Center">
 
+                                   
                                 <StackPanel  Margin="0 20 20 0"  HorizontalAlignment="Stretch" >
-
+                                    <Image Cursor="Hand" ToolTip="Select Image" Margin="0 30 0 0" Source="{Binding SelectedImage}" Height="120"  Width="120">
+                                        <Image.InputBindings>
+                                            <MouseBinding Gesture="LeftClick" Command="{Binding SelectImageCommand, Mode=OneTime}" />
+                                        </Image.InputBindings>
+                                    </Image>
                                     <TextBox MaxLines="2"  MaxLength="100"  Text="{Binding  AuthorFirstName,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="First name" 
                                               Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
                                               Foreground="Black" Width="300" CaretBrush="Black" HorizontalAlignment="Stretch"  SelectionBrush="White" Margin="30 30 0 0"/>
                                     <TextBox  MaxLines="2" MaxLength="100" Text="{Binding  AuthorLastName,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Last name" 
                                               Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
                                               Foreground="Black" Width="300" CaretBrush="Black"   SelectionBrush="White" Margin="30 30 0 0"/>
+                                    <StackPanel  Margin="30 30 0 20" Orientation="Horizontal" Width="300" >
 
+                                        <RadioButton Command="{Binding CheckedGender}" Content="M" Margin="0 0 10 0" >
+
+                                        </RadioButton>
+                                        <RadioButton  Content="F" Margin="0 0 10 0" >
+
+                                        </RadioButton>
+                                    </StackPanel>
+                                
                                 </StackPanel>
                                 <StackPanel Margin="0 20 20 0" HorizontalAlignment="Stretch" >
 
                                     <DatePicker   Text="{Binding  BirthDate,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Birth Date" 
                                               Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
                                               Foreground="Black" Width="300"  Margin="30 30 0 0"/>
-                                    <DatePicker   Text="{Binding  Deathdate,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Death Date" 
+                                    <DatePicker   Text="{Binding  DeathDate,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Death Date" 
                                               Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
                                               Foreground="Black" Width="300"  Margin="30 30 0 0"/>
+                                   
                                     <TextBox   Width="300" Text="{Binding  Biography,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" materialDesign:HintAssist.Hint="Author biography" 
-                                              MaxLines="10" MaxLength="300"
+                                               MaxLength="1000"
                                               Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
                                               Foreground="Black"  CaretBrush="Black"  SelectionBrush="White" Margin="30 30 0 0"/>
                                     <TextBlock Margin="30 5 0 0" FontSize="11" Foreground="Gray" HorizontalAlignment="Right" Text="{Binding LeftMoreInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></TextBlock>
@@ -76,7 +91,7 @@
                                     <DropShadowEffect Opacity="0.3" BlurRadius="5" ShadowDepth="2"/>
                                 </Border.Effect>
 
-                                <Button Background="Transparent" BorderThickness="0" Height="Auto" SnapsToDevicePixels="True"  Command="{Binding CreateCommand}">
+                                <Button Background="Transparent" BorderThickness="0" Height="Auto" SnapsToDevicePixels="True"  Command="{Binding InsertRequestCommand}">
 
 
 

@@ -274,8 +274,6 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             Countries = new ObservableCollection<ComboBoxItem>();
             GetTip();
             GetCountries();
-
-            
         }
     }
 }
