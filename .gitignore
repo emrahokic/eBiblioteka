@@ -13,6 +13,11 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+
+#Push webApi only
+#eBiblioteka.DesktopWPF/
+#eBiblioteka.MVVM/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
