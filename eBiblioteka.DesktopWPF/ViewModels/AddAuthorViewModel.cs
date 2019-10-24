@@ -144,8 +144,6 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
         private async void SelectImage()
         {
-            
-
 
         }
     }
