@@ -48,10 +48,10 @@
                                               Foreground="Black" Width="300" CaretBrush="Black"   SelectionBrush="White" Margin="30 30 0 0"/>
                                     <StackPanel  Margin="30 30 0 20" Orientation="Horizontal" Width="300" >
 
-                                        <RadioButton Command="{Binding CheckedGender}" Content="M" Margin="0 0 10 0" >
+                                        <RadioButton IsChecked="{Binding MRadioButton}" Content="M" Margin="0 0 10 0" >
 
                                         </RadioButton>
-                                        <RadioButton  Content="F" Margin="0 0 10 0" >
+                                        <RadioButton IsChecked="{Binding FRadioButton}"  Content="F" Margin="0 0 10 0" >
 
                                         </RadioButton>
                                     </StackPanel>
@@ -59,13 +59,15 @@
                                 </StackPanel>
                                 <StackPanel Margin="0 20 20 0" HorizontalAlignment="Stretch" >
 
-                                    <DatePicker   Text="{Binding  BirthDate,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Birth Date" 
+                                    <DatePicker SelectedDate="{Binding BirthDate ,Mode=TwoWay}"  materialDesign:HintAssist.Hint="Birth Date" 
                                               Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
                                               Foreground="Black" Width="300"  Margin="30 30 0 0"/>
-                                    <DatePicker   Text="{Binding  DeathDate,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Death Date" 
+
+
+                                    <DatePicker Visibility="{Binding DateVisibility}" SelectedDate="{Binding DeathDate,Mode=TwoWay}"  materialDesign:HintAssist.Hint="Death Date" 
                                               Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
                                               Foreground="Black" Width="300"  Margin="30 30 0 0"/>
-                                   
+                                    <CheckBox Margin="30 30 0 20" IsChecked="{Binding IsPassedAway}" Style="{StaticResource MaterialDesignCheckBox}">Is Passed Away</CheckBox>
                                     <TextBox   Width="300" Text="{Binding  Biography,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" materialDesign:HintAssist.Hint="Author biography" 
                                                MaxLength="1000"
                                               Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 

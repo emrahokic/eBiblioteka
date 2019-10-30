@@ -18,6 +18,8 @@ namespace eBiblioteka.WebAPI.Database
         public string Salt { get; set; }
         public DateTime LastSalt { get; set; }
         public string Slika { get; set; }
+        public byte[] SlikaByte { get; set; }
+
         public int? OsobaId { get; set; }
 
         public virtual Osoba Osoba { get; set; }

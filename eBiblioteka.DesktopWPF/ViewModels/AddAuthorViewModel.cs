@@ -12,19 +12,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using static eBiblioteka.Model.Gender;
 
 namespace eBiblioteka.DesktopWPF.ViewModels
 {
     public class AddAuthorViewModel : BindableBase
     {
-        #region firebaseStorage creds
-        private readonly string ApiKey = "AIzaSyAM2tQJ6ae_6F6gUJcPhzWo4HQmFr9cvt0";
-        private readonly string Bucket = "ebiblioteka2019.appspot.com";
-        private readonly string AuthEmail = "ebiblioteka@rs2.fit.ba";
-        private readonly string AuthPassword = "NekiKulJakPrejakPass";
-        #endregion
-
         #region ApiServices
 
         private readonly APIService _apiCities = new APIService("Grad");
@@ -76,18 +72,19 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
             }
         }
-
-        public string BirthDate
+        public DateTime? BirthDate
         {
             get { return _pisacInsertRequest.GodinaRodjenja; }
-            set
-            {
-                SetProperty(ref _pisacInsertRequest.GodinaRodjenja, value);
+            set { 
+            
+                    SetProperty(ref _pisacInsertRequest.GodinaRodjenja, value);
             }
         }
 
-        public string DeathDate
+
+        public DateTime? DeathDate
         {
+
             get { return _pisacInsertRequest.GodinaSmrti; }
             set
             {
@@ -104,7 +101,48 @@ namespace eBiblioteka.DesktopWPF.ViewModels
                 SetProperty(ref _leftMoreInfo, value);
             }
         }
+        private bool _FRadioButton;
+        public bool FRadioButton
+        {
+            get { return _FRadioButton; }
+            set
+            {
+                SetProperty(ref _FRadioButton, value);
+                _pisacInsertRequest.Spol = _FRadioButton ? (int)_Gender.F : (int)_Gender.M;
+            }
+        }
+        private bool _MRadioButton;
+        public bool MRadioButton
+        {
+            get { return _MRadioButton; }
+            set
+            {
+                SetProperty(ref _MRadioButton, value);
+                _pisacInsertRequest.Spol = _MRadioButton ? (int)_Gender.M : (int)_Gender.F;
+            }
+        }
 
+        private bool _IsPassedAway;
+        public bool IsPassedAway
+        {
+            get { return _IsPassedAway; }
+            set
+            {
+                SetProperty(ref _IsPassedAway, value);
+                DateVisibility = _IsPassedAway ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        private Visibility _DateVisibility;
+        public Visibility DateVisibility
+        {
+            get { return _DateVisibility; }
+            set
+            {
+                SetProperty(ref _DateVisibility, value);
+            }
+        }
+        
 
         #endregion
 
@@ -117,22 +155,45 @@ namespace eBiblioteka.DesktopWPF.ViewModels
         public AddAuthorViewModel()
         {
             SelectedImage = "./SplashScrean – 2.png";
-
+            IsPassedAway = false;
+            
             SelectImageCommand = new DelegateCommand(SelectImage, CanExecute);
-            InsertRequestCommand = new DelegateCommand(InsertRequest, CanExecuteRequest);
+            InsertRequestCommand = new DelegateCommand(InsertRequest, CanExecuteRequest).ObservesProperty(() => AuthorFirstName)
+                                                                                        .ObservesProperty(() => AuthorLastName)
+                                                                                        .ObservesProperty(() => BirthDate)
+                                                                                        .ObservesProperty(() => DeathDate)
+                                                                                        .ObservesProperty(() => Biography)
+                                                                                        .ObservesProperty(() => IsPassedAway)
+                                                                                        .ObservesProperty(() => FRadioButton)
+                                                                                        .ObservesProperty(() => MRadioButton);
             _pisacInsertRequest = new PisacInsertRequest();
         }
 
         private bool CanExecuteRequest()
         {
-            return true;
 
+            if (IsPassedAway)
+            {
+                if (DeathDate == null)
+                {
+                    return false;
+                }
+            }
+
+            return !string.IsNullOrWhiteSpace(AuthorFirstName) &&
+                   !string.IsNullOrWhiteSpace(AuthorLastName) &&
+                   !string.IsNullOrWhiteSpace(Biography) &&
+                   BirthDate != null && (FRadioButton || MRadioButton);
         }
 
         private async void InsertRequest()
         {
-
+            if (!IsPassedAway)
+            {
+                _pisacInsertRequest.GodinaSmrti = null;
+            }
             var result = await _apiAuthor.Insert<Model.Pisac>(_pisacInsertRequest);
+
         }
 
         private bool CanExecute()
@@ -142,9 +203,9 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
         private string x;
 
-        private async void SelectImage()
+        private  void SelectImage()
         {
-
+          
         }
     }
 }

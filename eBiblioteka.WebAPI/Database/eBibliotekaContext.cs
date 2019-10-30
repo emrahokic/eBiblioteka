@@ -421,6 +421,10 @@ namespace eBiblioteka.WebAPI.Database
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Slika).HasMaxLength(100);
+                entity.Property(e => e.SlikaByte);
+                entity.Property(e => e.Biografija).HasMaxLength(1000);
+                entity.Property(e => e.Spol).IsRequired();
+
             });
 
             modelBuilder.Entity<Rola>(entity =>

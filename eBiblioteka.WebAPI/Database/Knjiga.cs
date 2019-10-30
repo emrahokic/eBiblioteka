@@ -21,6 +21,8 @@ namespace eBiblioteka.WebAPI.Database
         public int? IzdavacId { get; set; }
         public int? BibliotekaId { get; set; }
         public string Slika { get; set; }
+        public byte[] SlikaByte { get; set; }
+
         public int? Stranice { get; set; }
         public int? JazikId { get; set; }
 

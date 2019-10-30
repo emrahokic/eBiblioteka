@@ -28,16 +28,11 @@ namespace eBiblioteka.WebAPI.Services
         }
         public override Model.Pisac Insert(PisacInsertRequest request, UserIdentity userIdentity)
         {
-            //var _request = _mapper.Map<Database.Izdavac>(request);
+            var _request = _mapper.Map<Database.Pisac>(request);
 
-            //convertAndSaveImage(null);sad cu viditi sta je to
-
-            //_request.GradId = _context.Grad.Where(x => x.Naziv == request.Grad_).Select(x => x.GradId).FirstOrDefault();
-
-            //_context.Izdavac.Add(_request);
-            //_context.SaveChanges();
-            //return _mapper.Map<Model.Pis>(_request);
-            return null;
+            _context.Pisac.Add(_request);
+            _context.SaveChanges();
+            return _mapper.Map<Model.Pisac>(_request);
         }
 
        
