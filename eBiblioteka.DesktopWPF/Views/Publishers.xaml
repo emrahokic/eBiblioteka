@@ -18,7 +18,15 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <ListBox  ItemsSource="{Binding Libraries}">
+                    <ListBox  ItemsSource="{Binding Publishers}">
+                        <ListBox.ItemsPanel>
+
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        
+                        
                         <ListBox.ItemContainerStyle>
 
                             <Style TargetType="{x:Type ListBoxItem}">
@@ -46,14 +54,18 @@
                         <ListBox.ItemTemplate>
 
                             <DataTemplate>
-                                <Grid x:Name="RootHome" Margin="25 15 0 15" >
+                                <Grid x:Name="RootHome" Margin="0 0 0 0" >
 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="150px" ></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
 
-                                    <TextBlock Grid.Column="1" Margin="25 0 0 0" FontSize="20" Foreground="#FF444444" Text="{Binding Naziv}"></TextBlock>
+                                    <Image Grid.Row="0" Grid.Column="1" Source="https://cdn.vox-cdn.com/thumbor/3xHq2Shga3kfsw-lTM2Vlss3CgM=/0x0:2040x1360/1200x800/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/65093706/mdoying_180118_2249_0338stills.0.jpg"></Image>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" TextAlignment="Center" Padding="0" FontSize="20" Foreground="#FF444444" Text="{Binding Naziv}"></TextBlock>
 
 
                                 </Grid>

@@ -7,5 +7,6 @@ namespace eBiblioteka.WebAPI.Services
 {
     interface IDrzavaService : IService<Model.Drzava,Model.Drzava>
     {
+       
     }
 }

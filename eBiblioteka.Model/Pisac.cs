@@ -14,6 +14,6 @@ namespace eBiblioteka.Model
 
         public string Biografija;
         public int? Spol;
-        public byte[] Slika;
+        public byte[] SlikaByte;
     }
 }

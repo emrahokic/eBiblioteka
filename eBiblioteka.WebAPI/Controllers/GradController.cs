@@ -16,7 +16,7 @@ namespace eBiblioteka.WebAPI.Controllers
     public class GradController :  BaseCRUDController<Model.Grad,GradSearchRequest,GradUpsertRequest,GradUpsertRequest>
     {
         
-
+       
         public GradController(ICRUDService<Model.Grad,GradSearchRequest,GradUpsertRequest,GradUpsertRequest> service, IKorisnikService korisnikService) : base(service,korisnikService)
         {
             

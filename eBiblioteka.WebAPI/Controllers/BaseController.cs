@@ -29,7 +29,6 @@ namespace eBiblioteka.WebAPI.Controllers
         [HttpGet]
         public virtual List<T> Get([FromQuery]TSearch search)
         {
-            
             _user = _korisnikService.GetUserIdentity(this.User.Identity as ClaimsIdentity);
 
             return _service.Get(search,_user);

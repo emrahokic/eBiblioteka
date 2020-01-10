@@ -1,4 +1,5 @@
-﻿using eBiblioteka.WebAPI.Database;
+﻿using eBiblioteka.Model;
+using eBiblioteka.WebAPI.Database;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,6 @@ namespace eBiblioteka.WebAPI.Services
 {
     public interface IGradService : IService<Model.Grad, Model.Requests.GradSearchRequest>
     {
-       
+      
     }
 }

@@ -23,20 +23,32 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             public string Grad { get; set; }
 
         }
-        public ICollection<Publisher> Libraries { get; set; }
+        public ICollection<Publisher> Publishers { get; set; }
 
         private async void GetLibraries()
         {
             var libraries = await _apiLibraries.Get<List<Publisher>>(null);
 
-            Libraries.Clear();
-            for (int i = 0; i < 50; i++)
-            {
-                Libraries.Add(libraries[i]);
+            Publishers.Clear();
+            /*bug
+            *
+            *
+            *
+            *
+            *
+            *
+            *
+            *
+            *
+            *
+            */
 
+            foreach (var item in libraries)
+            {
+                Publishers.Add(item);
             }
            
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(Libraries);
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(Publishers);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Grad");
 
             view.GroupDescriptions.Add(groupDescription);
@@ -44,7 +56,7 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
         public PublishersViewModel()
         {
-            Libraries = new ObservableCollection<Publisher>();
+            Publishers = new ObservableCollection<Publisher>();
             GetLibraries();
             //gg
         }

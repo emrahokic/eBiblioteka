@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 using static eBiblioteka.Model.Gender;
 
 namespace eBiblioteka.DesktopWPF.ViewModels
@@ -205,7 +206,21 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
         private  void SelectImage()
         {
-          
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            var result = op.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                var img = new BitmapImage(new Uri(op.FileName));
+                SelectedImage = op.FileName;
+                byte[] array = File.ReadAllBytes(op.FileName);
+                _pisacInsertRequest.SlikaByte = array;
+
+            }
         }
+       
     }
 }
