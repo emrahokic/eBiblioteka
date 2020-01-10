@@ -50,39 +50,39 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             FullName =  APIService.Session.ImePrezime;
 
             navlist = new ObservableCollection<NavbarItem>();
-            if (APIService.Session.Role.Contains("SuperAdmin"))
+            if (APIService.Session.Role.Contains(Stringovi.SuperAdmin))
             {
                 navlist.Add(new NavbarItem() { Name = Stringovi.Home, TextStyle ="Bold"});
                 navlist.Add(new NavbarItem() { Name = Stringovi.Libraries, TextStyle = "Bold" });
                 navlist.Add(new NavbarItem() { Name = Stringovi.AddLibrary, TextStyle = "Regular" });
 
             }
-            else if (APIService.Session.Role.Contains("Admin"))
+            else if (APIService.Session.Role.Contains(Stringovi.Admin))
             {
                 navlist.Add(new NavbarItem() { Name = Stringovi.Publishers, TextStyle = "Bold" });
                 navlist.Add(new NavbarItem() { Name = Stringovi.AddPublisher, TextStyle = "Regular" });
                 navlist.Add(new NavbarItem() { Name = Stringovi.Authors, TextStyle = "Bold" });
                 navlist.Add(new NavbarItem() { Name = Stringovi.AddAuthor, TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "Books", TextStyle = "Bold" });
-                navlist.Add(new NavbarItem() { Name = "  Add Book", TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "  Reservations", TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "  Add Genre", TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "Members", TextStyle = "Bold" });
-                navlist.Add(new NavbarItem() { Name = "  Add Member", TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "Employees", TextStyle = "Bold" });
-                navlist.Add(new NavbarItem() { Name = "  Add Employee", TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Books, TextStyle = "Bold" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddBook, TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Reservations, TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddGenre, TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Members, TextStyle = "Bold" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddMember, TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Employees, TextStyle = "Bold" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddEmployee, TextStyle = "Regular" });
 
             }
-            else if (APIService.Session.Role.Contains("Uposlenik"))
+            else if (APIService.Session.Role.Contains(Stringovi.Uposlenik))
             {
-                navlist.Add(new NavbarItem() { Name = "Authors", TextStyle = "Bold" });
-                navlist.Add(new NavbarItem() { Name = "  Add Author", TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "Books", TextStyle = "Bold" });
-                navlist.Add(new NavbarItem() { Name = "  Add Book", TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "  Reservations", TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "  Add Genre", TextStyle = "Regular" });
-                navlist.Add(new NavbarItem() { Name = "Members", TextStyle = "Bold" });
-                navlist.Add(new NavbarItem() { Name = "  Add Member", TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Authors, TextStyle = "Bold" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddAuthor, TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Books, TextStyle = "Bold" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddBook, TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Reservations, TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddGenre, TextStyle = "Regular" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.Members, TextStyle = "Bold" });
+                navlist.Add(new NavbarItem() { Name = Stringovi.AddMember, TextStyle = "Regular" });
             }
         }
 
