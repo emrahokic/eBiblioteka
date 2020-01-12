@@ -135,7 +135,7 @@ namespace eBiblioteka.WebAPI
                 c.SwaggerEndpoint("/swagger/v2/swagger.json", "My API V2");
 
             });
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()

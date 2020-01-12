@@ -202,7 +202,7 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             return true;
         }
 
-        private string x;
+       
 
         private  void SelectImage()
         {
