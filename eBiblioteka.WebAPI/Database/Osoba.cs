@@ -8,7 +8,6 @@ namespace eBiblioteka.WebAPI.Database
         public Osoba()
         {
             Clan = new HashSet<Clan>();
-            Korisnik = new HashSet<Korisnik>();
             Uposlenik = new HashSet<Uposlenik>();
         }
 
@@ -19,10 +18,11 @@ namespace eBiblioteka.WebAPI.Database
         public int? GradId { get; set; }
         public string Jmbg { get; set; }
         public int? Spol { get; set; }
+        public int? KorisnikId { get; set; }
 
-        public virtual Grad Grad { get; set; }
-        public virtual ICollection<Clan> Clan { get; set; }
-        public virtual ICollection<Korisnik> Korisnik { get; set; }
-        public virtual ICollection<Uposlenik> Uposlenik { get; set; }
+        public Grad Grad { get; set; }
+        public Korisnik Korisnik { get; set; }
+        public ICollection<Clan> Clan { get; set; }
+        public ICollection<Uposlenik> Uposlenik { get; set; }
     }
 }

@@ -9,7 +9,42 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+
+    <materialDesign:DialogHost   IsOpen="{Binding IsDialogOpen}" CloseOnClickAway="True">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid  Width="400" Height="180" Margin="20,5,20,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" ></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock  Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"  Text="{Binding DialogText}" TextWrapping="WrapWithOverflow" />
+                <Button
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    BorderBrush="#003688A6"
+                    Foreground="#fff" Grid.ColumnSpan="2"  IsCancel="True"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                    Grid.Row="1" HorizontalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center" Grid.Column="0" >
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF60C3D4" Offset="0"/>
+                            <GradientStop Color="#21608B" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <materialDesign:PackIcon
+                        Kind="Check"
+                        Height="24"
+                        Width="24" />
+                </Button>
+
+            </Grid>
+
+        </materialDesign:DialogHost.DialogContent>
+        <Grid>
         <ScrollViewer>
             <StackPanel>
                 <Grid x:Name="RootHome" Margin="80 25 80 50 " >
@@ -26,6 +61,7 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <StackPanel Margin="30 20 0 0" Grid.Row="0" Orientation="Vertical">
                                 <TextBlock  FontSize="25" Foreground="#FF444444">Add Author</TextBlock>
@@ -34,7 +70,7 @@
                             <WrapPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="0" Width="Auto" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                                 
                                 <StackPanel  Margin="0 20 20 0"  HorizontalAlignment="Stretch">
-                                    <Image Cursor="Hand" ToolTip="Select Image" Margin="0 30 0 0" Source="{Binding SelectedImage}" Height="120"  Width="120">
+                                    <Image Cursor="Hand" ToolTip="Select Image" Margin="0 30 0 0" Source="{Binding SelectedImage}" Height="200"  Width="200">
                                         <Image.InputBindings>
                                             <MouseBinding Gesture="LeftClick" Command="{Binding SelectImageCommand, Mode=OneTime}" />
                                         </Image.InputBindings>
@@ -99,6 +135,14 @@
                                     <TextBlock FontSize="17" Foreground="White">Create</TextBlock>
                                 </Button>
                             </Border>
+                            <ProgressBar
+                               Height="7"
+                                Background="#60C3D4"
+                                Foreground="#3688A6"   
+                                Margin="0,30,0,0"
+                                Grid.Row="3"
+                                Visibility="{Binding IsVisible}"
+                                IsIndeterminate="{Binding IsBusy}" />
                         </Grid>
 
                     </materialDesign:Card>
@@ -106,4 +150,6 @@
             </StackPanel>
         </ScrollViewer>
     </Grid>
+    </materialDesign:DialogHost>
+
 </UserControl>

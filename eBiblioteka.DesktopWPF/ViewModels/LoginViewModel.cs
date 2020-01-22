@@ -1,4 +1,5 @@
 ﻿using eBiblioteka;
+using eBiblioteka.DesktopWPF.Helper;
 using eBiblioteka.DesktopWPF.Views;
 using eBiblioteka.MVVM;
 using Prism.Commands;
@@ -47,7 +48,24 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
         }
 
-
+        private string _dialogtext;
+        public string DialogText
+        {
+            get { return _dialogtext; }
+            set
+            {
+                SetProperty(ref _dialogtext, value);
+            }
+        }
+        private bool _isDialogOpen;
+        public bool IsDialogOpen
+        {
+            get { return _isDialogOpen; }
+            set
+            {
+                SetProperty(ref _isDialogOpen, value);
+            }
+        }
 
         public bool RememberMe
         {
@@ -70,17 +88,34 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
         public LoginViewModel()
         {
+            IsDialogOpen = false;
+
+            if (Properties.Settings.Default.RememberMe)
+            {
+                Password = EncryptionHelper.Decrypt(Properties.Settings.Default.Element2);
+                Email = EncryptionHelper.Decrypt(Properties.Settings.Default.Element1);
+            }
             LoginCommand = new DelegateCommand(ExecuteAsync, CanExecute).ObservesProperty(()=>Email).ObservesProperty(()=>Password);
         }
 
         public async void ExecuteAsync()
         {
-            Console.WriteLine("hi");
-            var result = await _auth.Auth<Model.Korisnik>(Email,Password);
+            Model.Korisnik result = null;
+            try
+            {
+                 result = await _auth.Auth<Model.Korisnik>(Email, Password);
+
+            }
+            catch (Exception e)
+            {
+                IsDialogOpen = true;
+                DialogText = e.Message;
+            }
             if (result != null)
             {
                 if (!result.Token.Equals(""))
                 {
+                  
                     APIService.Session.JWT = result.Token;
 
                     var jwt = APIService.Session.JWT;
@@ -106,6 +141,20 @@ namespace eBiblioteka.DesktopWPF.ViewModels
                             APIService.Session.Role.Add(claim.Value);
                         }
 
+                    }
+                    if (APIService.Session.Role.Contains("Korisnik"))
+                    {
+                        IsDialogOpen = true;
+                        DialogText = "Niste authentificirani";
+                        return;
+                    }
+
+                    if (RememberMe)
+                    {
+                        Properties.Settings.Default.Element2 = EncryptionHelper.Encrypt(Password);
+                        Properties.Settings.Default.RememberMe = true;
+                        Properties.Settings.Default.Element1 = EncryptionHelper.Encrypt(Email);
+                        Properties.Settings.Default.Save();
                     }
 
                     var mv = new MainWindow();

@@ -16,9 +16,9 @@ namespace eBiblioteka.WebAPI.Database
         public string Naziv { get; set; }
         public int? DrzavaId { get; set; }
 
-        public virtual Drzava Drzava { get; set; }
-        public virtual ICollection<Biblioteka> Biblioteka { get; set; }
-        public virtual ICollection<Izdavac> Izdavac { get; set; }
-        public virtual ICollection<Osoba> Osoba { get; set; }
+        public Drzava Drzava { get; set; }
+        public ICollection<Biblioteka> Biblioteka { get; set; }
+        public ICollection<Izdavac> Izdavac { get; set; }
+        public ICollection<Osoba> Osoba { get; set; }
     }
 }

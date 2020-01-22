@@ -6,6 +6,7 @@ namespace eBiblioteka.Model.Requests
 {
     public class IzdavacInsertRequest
     {
+        public byte[] SlikaByte;
         public string Naziv;
         public string Grad_;
     }

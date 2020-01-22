@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
+        xmlns:ff="clr-namespace:eBiblioteka.DesktopWPF"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -21,7 +22,24 @@
     <Window.Background>
         <ImageBrush ImageSource="/images/Login – 1.png" Stretch="Fill" />
     </Window.Background>
-    <Grid Height="419" Width="792" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+    <materialDesign:DialogHost   IsOpen="{Binding IsDialogOpen}" CloseOnClickAway="True">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid  Width="400" Height="180" Margin="20,5,20,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" ></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Text="{Binding DialogText}" TextWrapping="WrapWithOverflow" />
+                <Button Style="{StaticResource MaterialDesignFlatButton}"  IsCancel="True"
+          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Foreground="#21608B" Grid.Row="1" HorizontalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center" Grid.Column="0" >Cancle</Button>
+            </Grid>
+
+        </materialDesign:DialogHost.DialogContent>
+        <Grid Height="419" Width="792" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -55,13 +73,24 @@
         <TextBox HorizontalAlignment="Left" TabIndex="0"  Text="{Binding  Email,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"  Height="35" Margin="52,180,0,0" materialDesign:HintAssist.Hint="E-mail" 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" 
               VerticalAlignment="Top" Width="261" BorderBrush="#FFFFDBBA" Foreground="#DDFFFFFF" CaretBrush="#FFFFDBBA" SelectionBrush="White"></TextBox>
-        <TextBox HorizontalAlignment="Left" TabIndex="1" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}" Height="35" Margin="52,220,0,0" materialDesign:HintAssist.Hint="Password" 
+        <!--<TextBox HorizontalAlignment="Left" TabIndex="1" Text="{Binding Path=Password,ElementName=Pass,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}" Height="35" Margin="52,220,0,0" materialDesign:HintAssist.Hint="Password" 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-               VerticalAlignment="Top" Width="261" BorderBrush="#FFFFDBBA" Foreground="#DDFFFFFF" CaretBrush="#FFFFDBBA"/>
-        <CheckBox Content="CheckBox" TabIndex="2" IsChecked="{Binding RememberMe,Mode=TwoWay}" HorizontalAlignment="Left" Margin="52,306,0,0" VerticalAlignment="Top" BorderBrush="#FFFFDBBA" Background="#FFFFDBBA"  Foreground="#DDFFFFFF" BorderThickness="1,0,1,1"/>
+               VerticalAlignment="Top" Width="261" BorderBrush="#FFFFDBBA" Foreground="#DDFFFFFF" CaretBrush="#FFFFDBBA"/>-->
+        <PasswordBox
+             TabIndex="1" HorizontalAlignment="Left"
+            VerticalAlignment="Top" Width="261" BorderBrush="#FFFFDBBA" Foreground="#DDFFFFFF" CaretBrush="#FFFFDBBA"
+            x:Name="PasswordBox"
+            Height="35" Margin="52,220,0,0"
+            ff:PasswordBoxAssistant.BindPassword="true"  ff:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             materialDesign:HintAssist.Hint="Password"
+             materialDesign:HintAssist.Foreground="#DDFFFFFF"
+             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+        <CheckBox Content="Remeber me"  TabIndex="2" IsChecked="{Binding RememberMe,Mode=TwoWay}" HorizontalAlignment="Left" Margin="52,306,0,0" VerticalAlignment="Top" BorderBrush="#FFFFDBBA" Background="#FFFFDBBA"  Foreground="#DDFFFFFF" BorderThickness="1,0,1,1"/>
         <Image Stretch="Fill"  Source="/images/Intersection 1.png" Height="419" Margin="367,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="425"/>
         <TextBlock HorizontalAlignment="Left" Margin="52,75,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Foreground="#DDFFFFFF" FontStretch="Condensed" Width="89" FontWeight="SemiBold" FontSize="30" FontFamily="Segoe UI"/>
         <Image HorizontalAlignment="Left" Source="/images/Logo.png" Height="144" Margin="521,152,0,0" VerticalAlignment="Top" Width="138"/>
 
     </Grid>
+    </materialDesign:DialogHost>
+
 </Window>

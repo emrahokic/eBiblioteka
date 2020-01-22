@@ -8,11 +8,13 @@ using eBiblioteka.Model.Requests;
 using eBiblioteka.WebAPI.Database;
 using eBiblioteka.WebAPI.Helpers;
 using eBiblioteka.WebAPI.Services;
+using eBiblioteka.WebAPI.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -96,6 +98,7 @@ namespace eBiblioteka.WebAPI
             });
 
             //services interface
+            services.AddScoped<ICRUDService<Model.Notifikacija, NotifikacijaSearchRequest, NotifikacijaInsertRequest, NotifikacijaInsertRequest>, NotifikacijaService>();
             services.AddScoped<ICRUDService<Model.Grad, GradSearchRequest, GradUpsertRequest, GradUpsertRequest>, GradService>();
             services.AddScoped<ICRUDService<Model.Biblioteka, BibliotekaSearchRequest, BibliotekaInsertRequest, BibliotekaInsertRequest>, BibliotekaService>();
             services.AddScoped<ICRUDService<Model.Izdavac, IzdavacSearchRequest, IzdavacInsertRequest, IzdavacInsertRequest>, IzdavacService>();
@@ -105,7 +108,9 @@ namespace eBiblioteka.WebAPI
             services.AddScoped<IKorisnikService, KorisnikService>();
             //db conection
             var connection = Configuration.GetConnectionString("localDev");
-           
+
+            //SignalR
+            services.AddSignalR();
 
             services.AddDbContext<eBibliotekaContext>(options => options.UseSqlServer(connection));
             services.AddSpaStaticFiles(configuration =>
@@ -144,7 +149,10 @@ namespace eBiblioteka.WebAPI
 
 
             app.UseAuthentication();
-
+            app.UseSignalR( c => {
+                c.MapHub<SignalRHub>("/notifications");
+            }
+            );
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseMvc(routes =>
@@ -152,6 +160,7 @@ namespace eBiblioteka.WebAPI
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+                
             });
 
             app.UseSpa(spa =>

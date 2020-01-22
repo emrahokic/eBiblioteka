@@ -22,7 +22,7 @@ namespace eBiblioteka.Mobile.Services
         private readonly string _route;
 
 #if DEBUG
-        private string _apiUrl = "https://192.168.0.15:45456/api";
+        private string _apiUrl = "http://localhost:57049/api";
 #endif
 #if RELEASE
         private string _apiUrl = "https://localhost:44360/api";
@@ -51,9 +51,7 @@ namespace eBiblioteka.Mobile.Services
                     //MessageBox.Show("Niste authentificirani");
                     await Application.Current.MainPage.DisplayAlert("Greška", "Niste authentificirani", "OK");
                 }
-                await Application.Current.MainPage.DisplayAlert("Greška", "Netacan username ili password", "OK");
-
-                throw;
+                return default(T);
             }
         }
 

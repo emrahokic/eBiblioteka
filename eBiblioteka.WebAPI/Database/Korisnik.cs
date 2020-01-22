@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace eBiblioteka.WebAPI.Database
 {
-    public partial class Korisnik 
+    public partial class Korisnik
     {
         public Korisnik()
         {
             KorisnikRola = new HashSet<KorisnikRola>();
+            Osoba = new HashSet<Osoba>();
         }
 
         public int KorisnikId { get; set; }
@@ -19,11 +19,9 @@ namespace eBiblioteka.WebAPI.Database
         public DateTime LastSalt { get; set; }
         public string Slika { get; set; }
         public byte[] SlikaByte { get; set; }
+        public string Token { get; set; }
 
-        public int? OsobaId { get; set; }
-
-        public virtual Osoba Osoba { get; set; }
-        public virtual ICollection<KorisnikRola> KorisnikRola { get; set; }
-        public string Token { get; internal set; }
+        public ICollection<KorisnikRola> KorisnikRola { get; set; }
+        public ICollection<Osoba> Osoba { get; set; }
     }
 }

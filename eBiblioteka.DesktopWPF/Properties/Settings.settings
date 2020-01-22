@@ -3,7 +3,16 @@
   <Profiles />
   <Settings>
     <Setting Name="APIUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://localhost:57049/api</Value>
+      <Value Profile="(Default)"> http://localhost:57049/api</Value>
+    </Setting>
+    <Setting Name="Element1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RememberMe" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Element2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

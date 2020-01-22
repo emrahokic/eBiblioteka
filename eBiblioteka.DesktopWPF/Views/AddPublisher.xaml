@@ -9,85 +9,142 @@
               xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ScrollViewer>
-            <StackPanel>
-                <Grid x:Name="RootHome" Margin="80 25 80 50 " >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <materialDesign:Card UniformCornerRadius="10" Padding="20" MaxWidth="800">
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="292*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <StackPanel Margin="30 20 0 0" Grid.Row="0" Orientation="Vertical">
-                                <TextBlock  FontSize="25" Foreground="#FF444444">Add Publisher</TextBlock>
+    <materialDesign:DialogHost   IsOpen="{Binding IsDialogOpen}" CloseOnClickAway="True">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid  Width="400" Height="180" Margin="20,5,20,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" ></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-                            </StackPanel>
-                            <WrapPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="0" Width="Auto" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                <TextBlock  Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"  Text="{Binding DialogText}" TextWrapping="WrapWithOverflow" />
+                <Button
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    BorderBrush="#003688A6"
+                    Foreground="#fff" Grid.ColumnSpan="2"  IsCancel="True"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                    Grid.Row="1" HorizontalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center" Grid.Column="0" >
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF60C3D4" Offset="0"/>
+                            <GradientStop Color="#21608B" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <materialDesign:PackIcon
+                        Kind="Check"
+                        Height="24"
+                        Width="24" />
+                </Button>
 
-                                <StackPanel  Margin="0 20 20 0"  HorizontalAlignment="Stretch" >
+            </Grid>
 
-                                    <TextBox MaxLines="2"  MaxLength="100"  Text="{Binding  PublisherName,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Name of Publisher" 
+        </materialDesign:DialogHost.DialogContent>
+        <Grid>
+            <ScrollViewer>
+                <StackPanel>
+                    <Grid x:Name="RootHome" Margin="80 25 80 50 " >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:Card UniformCornerRadius="10" Padding="20" MaxWidth="800">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="292*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Margin="30 20 0 0" Grid.Row="0" Orientation="Vertical">
+                                    <TextBlock  FontSize="25" Foreground="#FF444444">Add Publisher</TextBlock>
+
+                                </StackPanel>
+                                <WrapPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="0" Width="Auto" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+
+                                    <StackPanel  Margin="0 20 20 0"  HorizontalAlignment="Stretch" >
+                                        <Image Cursor="Hand" ToolTip="Select Image" Margin="30 5 0 0" Source="{Binding SelectedImage}" Height="300"  Width="300">
+                                            <Image.InputBindings>
+                                                <MouseBinding Gesture="LeftClick" Command="{Binding SelectImageCommand, Mode=OneTime}" />
+                                            </Image.InputBindings>
+                                        </Image>
+                                        <TextBox MaxLines="2"  MaxLength="100"  Text="{Binding  PublisherName,NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Name of Publisher" 
                                               Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top"  BorderBrush="#FFFFDBBA" 
                                               Foreground="Black" Width="300" CaretBrush="Black" HorizontalAlignment="Stretch"  SelectionBrush="White" Margin="30 30 0 0"/>
-                                   
-                                  
-                                    <ComboBox ItemsSource="{Binding Countries}"
+
+
+                                        <ComboBox ItemsSource="{Binding Countries}"
                                               IsEnabled="{Binding CountriesIsEnabled}"
                                                BorderBrush="#FFFFDBBA"
+                                              IsEditable="True"
+                                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                              
                                               SelectedItem="{Binding SelectedItemCountry}"
                                         materialDesign:HintAssist.Hint="Country"
                                         FontSize="14" Width="300"
                                         Margin="30 30 0 0"/>
 
-                                    <ComboBox ItemsSource="{Binding Cities}"
+                                        <ComboBox ItemsSource="{Binding Cities}"
+                                              IsEditable="True"
                                               IsEnabled="{Binding CitiesIsEnabled}"
                                                BorderBrush="#FFFFDBBA"
                                               SelectedItem="{Binding SelectedItemCity, Mode=TwoWay}"
                                         materialDesign:HintAssist.Hint="City"
                                         FontSize="14" Width="300"
                                         Margin="30 30 0 0"/>
-                                    
-
-
-                                </StackPanel>
-                               
-                            </WrapPanel>
-
-                            <Border CornerRadius="20" Grid.Row="2"  Width="150" Height="40"  Margin="0 25 0 0"  >
-                                <Border.Background>
-
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                        <GradientStop Color="#E3A872" Offset="0.0"></GradientStop>
-                                        <GradientStop Color="#E2D0B7" Offset="1.0"></GradientStop>
-
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <Border.Effect>
-
-                                    <DropShadowEffect Opacity="0.3" BlurRadius="5" ShadowDepth="2"/>
-                                </Border.Effect>
-
-                                <Button Background="Transparent" BorderThickness="0" Height="Auto" SnapsToDevicePixels="True"  Command="{Binding CreateCommand}">
 
 
 
-                                    <TextBlock FontSize="17" Foreground="White">Create</TextBlock>
-                                </Button>
-                            </Border>
-                        </Grid>
+                                    </StackPanel>
 
-                    </materialDesign:Card>
-                </Grid>
-            </StackPanel>
-        </ScrollViewer>
-    </Grid>
+                                </WrapPanel>
+
+                                <Border CornerRadius="20" Grid.Row="2"  Width="150" Height="40"  Margin="0 25 0 0"  >
+                                    <Border.Background>
+
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#E3A872" Offset="0.0"></GradientStop>
+                                            <GradientStop Color="#E2D0B7" Offset="1.0"></GradientStop>
+
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Border.Effect>
+
+                                        <DropShadowEffect Opacity="0.3" BlurRadius="5" ShadowDepth="2"/>
+                                    </Border.Effect>
+
+                                    <Button Background="Transparent" BorderThickness="0" Height="Auto" SnapsToDevicePixels="True"  Command="{Binding CreateCommand}">
+
+
+
+                                        <TextBlock FontSize="17" Foreground="White">Create</TextBlock>
+                                    </Button>
+                                </Border>
+
+
+                                <ProgressBar
+                               Height="7"
+                                Background="#60C3D4"
+                                Foreground="#3688A6"   
+                                Margin="0,30,0,0"
+                                Grid.Row="3"
+                                Visibility="{Binding IsVisible}"
+                                IsIndeterminate="{Binding IsBusy}" />
+                            </Grid>
+
+                        </materialDesign:Card>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </materialDesign:DialogHost>
+
 </UserControl>

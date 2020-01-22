@@ -10,6 +10,7 @@ namespace eBiblioteka.WebAPI.Database
             Clanarina = new HashSet<Clanarina>();
             KnjigaIzdavanje = new HashSet<KnjigaIzdavanje>();
             KnjigaRezervacija = new HashSet<KnjigaRezervacija>();
+            Notifikacija = new HashSet<Notifikacija>();
         }
 
         public int ClanId { get; set; }
@@ -19,11 +20,11 @@ namespace eBiblioteka.WebAPI.Database
         public int Aktivan { get; set; }
         public int? BibliotekaId { get; set; }
 
-        public virtual Biblioteka Biblioteka { get; set; }
-        public virtual Osoba Osoba { get; set; }
-
-        public virtual ICollection<Clanarina> Clanarina { get; set; }
-        public virtual ICollection<KnjigaIzdavanje> KnjigaIzdavanje { get; set; }
-        public virtual ICollection<KnjigaRezervacija> KnjigaRezervacija { get; set; }
+        public Biblioteka Biblioteka { get; set; }
+        public Osoba Osoba { get; set; }
+        public ICollection<Clanarina> Clanarina { get; set; }
+        public ICollection<KnjigaIzdavanje> KnjigaIzdavanje { get; set; }
+        public ICollection<KnjigaRezervacija> KnjigaRezervacija { get; set; }
+        public ICollection<Notifikacija> Notifikacija { get; set; }
     }
 }

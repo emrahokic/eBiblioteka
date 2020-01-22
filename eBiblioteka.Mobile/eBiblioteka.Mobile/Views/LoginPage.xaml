@@ -4,23 +4,30 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:eBiblioteka.Mobile.ViewModels"
-                         mc:Ignorable="d"
+             mc:Ignorable="d"
+              xmlns:local="clr-namespace:eBiblioteka.Mobile;assembly=eBiblioteka.Mobile"
+             BackgroundImageSource="bgg"
              x:Class="eBiblioteka.Mobile.Views.LoginPage">
     <ContentPage.BindingContext>
         <vm:LoginViewModel></vm:LoginViewModel>
     </ContentPage.BindingContext>
-    
-    <ContentPage.Content>
-        
-        <StackLayout BackgroundColor="Bisque" HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="CenterAndExpand">
-            <Image Source="https://st3.depositphotos.com/6235482/12956/i/950/depositphotos_129564948-stock-photo-antique-books-stack.jpg" Aspect="AspectFit" />
-            <Label Text="Korisničko ime"></Label>
-            <Entry Text="{Binding Username}"></Entry>
-            <Label  Text="Password"></Label>
-            <Entry Text="{Binding Password}" IsPassword="True"></Entry>
 
-            <Button Command="{Binding LoginCommand}"  HorizontalOptions="FillAndExpand" Text="Login"></Button>
-            <Label IsVisible="{Binding IsBusy}" Text="..."></Label>
+    <ContentPage.Content>
+
+        <StackLayout HorizontalOptions="FillAndExpand">
+             <Image  VerticalOptions="CenterAndExpand"  HorizontalOptions="Center" Source="logo"/>
+            <StackLayout Margin="30"  VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+
+
+                <Label IsVisible="False" TextColor="#fff" VerticalOptions="Center"  Text="Korisničko ime"></Label>
+                <local:CustomEntry Placeholder="Korisnicko ime" VerticalOptions="Center" Text="{Binding Username}"></local:CustomEntry>
+                <Label IsVisible="False" TextColor="#fff"  VerticalOptions="Center"  Text="Password"></Label>
+                <local:CustomEntry  Placeholder="Lozinka" VerticalOptions="Center" Text="{Binding Password}" IsPassword="True"></local:CustomEntry>
+            </StackLayout>
+
+            <Button  Margin="20" BackgroundColor="#8EC9D7" TextColor="#fff" Command="{Binding LoginCommand}" VerticalOptions="End"  HorizontalOptions="Fill" Text="Login"></Button>
+             <ActivityIndicator VerticalOptions="Center" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="20" TextColor="#FFF" Text="Forgot Password?"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

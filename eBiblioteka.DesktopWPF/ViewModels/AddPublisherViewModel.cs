@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Media.Imaging;
+using System.IO;
+using eBiblioteka.DesktopWPF.Helper;
 
 namespace eBiblioteka.DesktopWPF.ViewModels
 {
@@ -51,6 +55,16 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             }
         }
 
+        private string _selectedImage;
+        public string SelectedImage
+        {
+            get { return _selectedImage; }
+            set
+            {
+                SetProperty(ref _selectedImage, value);
+            }
+        }
+
         private bool _countriesIsEnabled;
         public bool CountriesIsEnabled
         {
@@ -61,6 +75,29 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             }
         }
 
+
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                SetProperty(ref _isBusy, value);
+            }
+        }
+
+        private Visibility _isVisible;
+        public Visibility IsVisible
+        {
+            get { return _isVisible; }
+            set
+            {
+                SetProperty(ref _isVisible, value);
+            }
+        }
+
+      
+
         public string PublisherName
         {
             get { return _publisherInsertRequest.Naziv; }
@@ -70,10 +107,26 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             }
         }
 
-   
+        private string _dialogtext;
+        public string DialogText
+        {
+            get { return _dialogtext; }
+            set
+            {
+                SetProperty(ref _dialogtext, value);
+            }
+        }
+        private bool _isDialogOpen;
+        public bool IsDialogOpen
+        {
+            get { return _isDialogOpen; }
+            set
+            {
+                SetProperty(ref _isDialogOpen, value);
+            }
+        }
 
 
-    
         public ComboBoxItem SelectedItemCountry
         {
             get { return _selectedComboBoxCountry; }
@@ -101,6 +154,9 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
         private async void GetCities()
         {
+            if (_selectedComboBoxCountry != null )
+            {
+
             var gradovi = await _apiCities.Get<List<Model.Grad>>(new GradSearchRequest()
             {
                 DrzavaNaziv = _selectedComboBoxCountry.Content.ToString()
@@ -113,6 +169,15 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
             }
             CitiesIsEnabled = true;
+            }
+            else
+            {
+                Cities.Clear();
+                CitiesIsEnabled = false;
+
+
+            }
+
         }
         private async void GetCountries()
         {
@@ -131,12 +196,22 @@ namespace eBiblioteka.DesktopWPF.ViewModels
         #region Commands
 
         public DelegateCommand CreateCommand { get; set; }
+        public DelegateCommand SelectImageCommand { get; set; }
+        public DelegateCommand MouseEnter { get; set; }
 
         #endregion
         public AddPublisherViewModel()
         {
+            IsDialogOpen = false;
+
+            IsBusy = false;
+            IsVisible = Visibility.Hidden;
+            SelectedImage = "../Images/border.png";
             CreateCommand = new DelegateCommand(CreatePublisherAsync, CanExecute).ObservesProperty(() => PublisherName)
                                                                          .ObservesProperty(() => SelectedItemCity);
+            SelectImageCommand = new DelegateCommand(SelectImage, CanExecute2);
+            MouseEnter = new DelegateCommand(MouseEnterCmnd, CanExecute2);
+
             _publisherInsertRequest = new IzdavacInsertRequest();
 
             Cities = new ObservableCollection<ComboBoxItem>();
@@ -144,22 +219,58 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             GetCountries();
         }
 
+        private void MouseEnterCmnd()
+        {
+            Console.WriteLine("HI");
+        }
+
         private bool CanExecute()
         {
             return !string.IsNullOrWhiteSpace(PublisherName) &&
                    !string.IsNullOrWhiteSpace(SelectedItemCity?.Content.ToString());
         }
-
+        private bool CanExecute2()
+        {
+            return true;
+        }
         private async void CreatePublisherAsync()
         {
+            IsBusy = true;
+            IsVisible = Visibility.Visible;
             var result = await _apiPublishers.Insert<Model.Izdavac>(_publisherInsertRequest);
             if (result != null)
             {
                 this.PublisherName = "";
-                MessageBox.Show("Publisher is successuful added!");
+                SelectedItemCountry = null;
+                SelectedItemCity = null;
+                IsBusy = false;
+                IsVisible = Visibility.Hidden;
+                IsDialogOpen = true;
+                DialogText = "Publisher is successuful added!";
                 return;
             }
-            MessageBox.Show("Something went worng");
+            IsBusy = false;
+            IsVisible = Visibility.Hidden;
+            DialogText = "Publisher is successuful added!";
+
+        }
+
+        private void SelectImage()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            var result = op.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                var img = new BitmapImage(new Uri(op.FileName));
+                SelectedImage = op.FileName;
+                byte[] array = File.ReadAllBytes(op.FileName);
+                _publisherInsertRequest.SlikaByte = array;
+
+            }
         }
     }
 }

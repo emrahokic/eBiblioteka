@@ -143,8 +143,43 @@ namespace eBiblioteka.DesktopWPF.ViewModels
                 SetProperty(ref _DateVisibility, value);
             }
         }
-        
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                SetProperty(ref _isBusy, value);
+            }
+        }
 
+        private Visibility _isVisible;
+        public Visibility IsVisible
+        {
+            get { return _isVisible; }
+            set
+            {
+                SetProperty(ref _isVisible, value);
+            }
+        }
+        private string _dialogtext;
+        public string DialogText
+        {
+            get { return _dialogtext; }
+            set
+            {
+                SetProperty(ref _dialogtext, value);
+            }
+        }
+        private bool _isDialogOpen;
+        public bool IsDialogOpen
+        {
+            get { return _isDialogOpen; }
+            set
+            {
+                SetProperty(ref _isDialogOpen, value);
+            }
+        }
         #endregion
 
         #region Commands
@@ -155,7 +190,11 @@ namespace eBiblioteka.DesktopWPF.ViewModels
         #endregion
         public AddAuthorViewModel()
         {
-            SelectedImage = "./SplashScrean – 2.png";
+            IsDialogOpen = false;
+            IsBusy = false;
+            IsVisible = Visibility.Hidden;
+
+            SelectedImage = "../Images/border.png";
             IsPassedAway = false;
             
             SelectImageCommand = new DelegateCommand(SelectImage, CanExecute);
@@ -193,7 +232,26 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             {
                 _pisacInsertRequest.GodinaSmrti = null;
             }
+            IsBusy = true;
+            IsVisible = Visibility.Visible;
             var result = await _apiAuthor.Insert<Model.Pisac>(_pisacInsertRequest);
+            if (result != null)
+            {
+                AuthorFirstName = "";
+                SelectedImage = "../Images/border.png";
+                AuthorLastName = "";
+                Biography = "";
+                BirthDate = null;
+                DeathDate = null;
+                FRadioButton = false;
+                MRadioButton = false;
+                IsPassedAway = false;
+                DateVisibility = Visibility.Collapsed;
+                IsDialogOpen = true;
+                DialogText = "Author is added successfuly!";
+            }
+            IsBusy = false;
+            IsVisible = Visibility.Hidden;
 
         }
 

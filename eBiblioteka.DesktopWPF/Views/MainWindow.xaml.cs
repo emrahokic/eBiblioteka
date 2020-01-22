@@ -1,4 +1,6 @@
 ﻿using eBiblioteka.DesktopWPF.Helper;
+using eBiblioteka.DesktopWPF.ViewModels;
+using Prism.Mvvm;
 using Prism.Unity;
 using System;
 using System.Collections.Generic;
@@ -13,18 +15,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static eBiblioteka.DesktopWPF.ViewModels.MainWindowViewModel;
 
 namespace eBiblioteka.DesktopWPF.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window,IMyNavigation
     {
-        public static  MainWindow _mainWindowsInstance;
+
+
+        private  MainWindowViewModel _model;
+        public IMyNavigation myNavigation;
         public MainWindow()
         {
+            
             InitializeComponent();
+            _model = DataContext as MainWindowViewModel;
+            _model.myNavigation = myNavigation = this;
         }
         private void Shutdown(object sender, RoutedEventArgs e)
         {
@@ -49,15 +58,21 @@ namespace eBiblioteka.DesktopWPF.Views
         }
         private void Restore(object sender, RoutedEventArgs e)
         {
+            
             this.WindowState = WindowState.Normal;
             MaximizeWindowBtn.Visibility = Visibility.Visible;
             RestoreWindowBtn.Visibility = Visibility.Collapsed;
         }
+        
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+           
             var index = ListViewMenu.SelectedIndex;
             var item = ListViewMenu.SelectedItem as ViewModels.MainWindowViewModel.NavbarItem;
+            if (item == null)
+            {
+                return;
+            }
             var name = item.Name;
 
             MoveCursorMenu(index);
@@ -103,11 +118,50 @@ namespace eBiblioteka.DesktopWPF.Views
 
         }
 
+
     
         private void MoveCursorMenu(int index)
         {
             TrainsitioningContentSlide.OnApplyTemplate();
             GridCursor.Margin = new Thickness(0, 0, 0, 385 - (50 * index));
+        }
+
+        private void Border_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ListViewMenu.SelectedItem = null;
+            G_root.Children.Clear();
+            G_root.Children.Add(new AddAuthor());
+            var item = (sender as StackPanel).DataContext as InAppNotification;
+           
+            for (int i = 0; i < _model.Notifikacije.Count; i++)
+            {
+                if (_model.Notifikacije[i].NotifikacijaObj.NotifikacijaId == item.NotifikacijaObj.NotifikacijaId )
+                {
+                    if (_model.Notifikacije[i].Nova)
+                    {
+                        if (_model.NumberOfNotifications > 0)
+                        {
+                        _model.NumberOfNotifications--;
+                        }
+                        else
+                        {
+                            _model.NumberOfNotifications = null;
+                        }
+                        _model.Notifikacije[i].Nova = false;
+
+                    }
+
+                }
+            }
+        }
+
+        public void Change()
+        {
+            Console.WriteLine("HelloFromInterface");
+            ListViewMenu.SelectedItem = null;
+            MoveCursorMenu(0);
+            G_root.Children.Clear();
+            G_root.Children.Add(new AddPublisher());
         }
     }
 }

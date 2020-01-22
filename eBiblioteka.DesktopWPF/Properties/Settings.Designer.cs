@@ -25,13 +25,49 @@ namespace eBiblioteka.DesktopWPF.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:57049/api")]
+        [global::System.Configuration.DefaultSettingValueAttribute(" http://localhost:57049/api")]
         public string APIUrl {
             get {
                 return ((string)(this["APIUrl"]));
             }
             set {
                 this["APIUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Element1 {
+            get {
+                return ((string)(this["Element1"]));
+            }
+            set {
+                this["Element1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RememberMe {
+            get {
+                return ((bool)(this["RememberMe"]));
+            }
+            set {
+                this["RememberMe"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Element2 {
+            get {
+                return ((string)(this["Element2"]));
+            }
+            set {
+                this["Element2"] = value;
             }
         }
     }

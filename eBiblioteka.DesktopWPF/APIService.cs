@@ -7,6 +7,7 @@ using Flurl;
 using System.Threading.Tasks;
 using System.Windows;
 using eBiblioteka.Model;
+using System.Windows.Threading;
 
 namespace eBiblioteka.DesktopWPF
 {
@@ -31,7 +32,7 @@ namespace eBiblioteka.DesktopWPF
             _route = route;
         }
 
-
+        
         public async Task<T> Auth<T>(string username,string password)
         {
             var url = $"{Properties.Settings.Default.APIUrl}/{_route}";
@@ -44,10 +45,13 @@ namespace eBiblioteka.DesktopWPF
             {
                 if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    MessageBox.Show("Niste authentificirani");
+                   throw new Exception("Niste authentificirani");
                 }
-                MessageBox.Show("Netacan username ili password");
-                return default(T);
+                //var dg = new Action(() => { MessageBox.Show("Netacan username ili password", "Message"); });
+                //Dispatcher.CurrentDispatcher.BeginInvoke(dg);
+                //MessageBox.Show("Netacan username ili password");
+                throw new Exception("Netacan username ili password");
+                //return default(T);
             }
         }
         public async Task<T> Get<T>(object search)

@@ -1,4 +1,5 @@
 ﻿using eBiblioteka.Mobile.Services;
+using eBiblioteka.Mobile.Views;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -42,6 +43,7 @@ namespace eBiblioteka.Mobile.ViewModels
             try
             {
                var _result = await _auth.Auth<Model.Korisnik>(Username, Password);
+               IsBusy = false;
 
                 if (_result != null)
                 {
@@ -73,16 +75,21 @@ namespace eBiblioteka.Mobile.ViewModels
                             }
 
                         }
-                        Application.Current.MainPage = new MainPage();
+                        Application.Current.MainPage = new MasterDetailPage1();
 
 
                     }
+                }
+                else
+                {
+                    IsBusy = false;
+                    await Application.Current.MainPage.DisplayAlert("Greška", "Netacan username ili password", "OK");
                 }
 
             }
             catch (Exception ex)
             {
-
+                IsBusy = false;
             }
         }
     }

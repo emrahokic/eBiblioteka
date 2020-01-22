@@ -14,6 +14,7 @@ namespace eBiblioteka.WebAPI.Mappers
             CreateMap<Database.Drzava, Model.Drzava>().ReverseMap();
             CreateMap<Database.Biblioteka, Model.Biblioteka>().ReverseMap();
             CreateMap<Database.Izdavac, Model.Izdavac>().ReverseMap();
+            CreateMap<Database.Notifikacija, Model.Notifikacija>().ReverseMap();
             CreateMap<Database.Pisac, Model.Pisac>().ReverseMap();
             CreateMap<Database.Pisac, Model.Requests.PisacInsertRequest>().ReverseMap();
             CreateMap<Database.Biblioteka, Model.Requests.BibliotekaInsertRequest>().ReverseMap();

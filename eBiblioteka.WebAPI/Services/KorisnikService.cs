@@ -35,7 +35,6 @@ namespace eBiblioteka.WebAPI.Services
                 KorisnikId = y.KorisnikId,
                 KorisnickoIme = y.KorisnickoIme,
                 Email = y.Email,
-                OsobaId = y.OsobaId,
                 Slika = y.Slika,
                 Osoba = y.Osoba,
                 KorisnickaSifraHash = y.KorisnickaSifraHash,
@@ -43,21 +42,21 @@ namespace eBiblioteka.WebAPI.Services
             }).FirstOrDefault();
 
             user.KorisnikRola = _context.KorisnikRola.Where(x => x.KorisnikId == user.KorisnikId).Include(x=>x.Rola).ToList();
-
+            Osoba o = _context.Osoba.Where(x => x.KorisnikId == user.KorisnikId).FirstOrDefault();
             var _korisnik = new Model.Korisnik() {
                 Email = user.Email,
-                Ime = user.Osoba.Ime,
-                Prezime = user.Osoba.Prezime,
+                Ime = o.Ime,
+                Prezime = o.Prezime,
                 KorisnickoIme = user.KorisnickoIme,
                 Slika = user.Slika
             };
 
             if (user.KorisnikRola.Select(x=>x.Rola.Naziv).Contains(Role.Uposlenik) || user.KorisnikRola.Select(x => x.Rola.Naziv).Contains(Role.Admin))
             {
-                _korisnik.BibliotekaNaziv = _context.Uposlenik.Where(x => x.OsobaId == user.OsobaId).Include(x => x.Biblioteka).Select(y => y.Biblioteka.Naziv).FirstOrDefault();
+                _korisnik.BibliotekaNaziv = _context.Uposlenik.Where(x => x.OsobaId ==o.OsobaId).Include(x => x.Biblioteka).Select(y => y.Biblioteka.Naziv).FirstOrDefault();
             }else if (user.KorisnikRola.Select(x => x.Rola.Naziv).Contains(Role.Korisnik))
             {
-                _korisnik.BibliotekaNaziv = _context.Clan.Where(x => x.OsobaId == user.OsobaId).Include(x => x.Biblioteka).Select(y => y.Biblioteka.Naziv).FirstOrDefault();
+                _korisnik.BibliotekaNaziv = _context.Clan.Where(x => x.OsobaId == o.OsobaId).Include(x => x.Biblioteka).Select(y => y.Biblioteka.Naziv).FirstOrDefault();
             }
             else
             {

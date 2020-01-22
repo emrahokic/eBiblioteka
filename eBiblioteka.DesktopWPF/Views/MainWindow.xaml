@@ -20,29 +20,94 @@
                     <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="4"/>
                 </Grid.Effect>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="73*"/>
+                    <ColumnDefinition Width="265"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="181*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" Height="45" FlowDirection="LeftToRight" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1">
+                <StackPanel Orientation="Horizontal" Width="Auto"  FlowDirection="LeftToRight"     HorizontalAlignment="Left" Margin="20,0,5,0" Grid.Column="1">
+                    <TextBlock FontSize="15" TextAlignment="Center"  Text="Your profile" Foreground="#878787" FontWeight="Bold"  VerticalAlignment="Center" Height="Auto" Margin="2,0,0,0"></TextBlock>
+                    <Image Source="../Images/arrow.png" Margin="0,6,0,0"></Image>
+                    <TextBlock FontSize="15" TextAlignment="Center" ToolTip="{Binding BibliotekaNaziv}"  Text="{Binding BibliotekaNaziv}" Foreground="#2796B3" FontWeight="Bold"  VerticalAlignment="Center" Height="Auto" Margin="2,0,0,0"></TextBlock>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="45" FlowDirection="LeftToRight" Margin="0,0,5,0" Grid.Column="2" HorizontalAlignment="Right">
                     <!--<Border CornerRadius="50,50,50,50" Margin="0,0,20,0" Height="35" Width="35">
-                        <Border.Background>
-                            --><!--<ImageBrush Stretch="Fill" ImageSource="{Binding KorisnikSlika}"/>--><!--
+                        <Border.Background>-->
+                            
+                    <!--<ImageBrush Stretch="Fill" ImageSource="{Binding KorisnikSlika}"/>
+                    
                             <cachedImage: ImageBrush ImageSource="{Binding LargeImageUrl}"></cachedImage: ImageBrush>
                         </Border.Background>
                     </Border>-->
-                    <cachedImage:Image  Margin="0,0,20,0" Height="35" Width="35" Stretch="Fill" ImageUrl="{Binding KorisnikSlika}">
-                       
+                    <cachedImage:Image   Margin="0,0,20,0" Height="35" Width="35" Stretch="Fill" ImageUrl="{Binding KorisnikSlika}">
+
                     </cachedImage:Image>
-                    
+
 
                     <TextBlock FontSize="15" TextAlignment="Center" Text="{Binding FullName}" VerticalAlignment="Center" Height="Auto" Margin="2,0,0,0"></TextBlock>
                     <TextBlock Height="Auto" TextAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0">|</TextBlock>
 
-                    <Button Width="30"  Height="Auto" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Margin="2,0,0,0">
-                        <materialDesign:PackIcon Kind="BellOutline"  Width="20" Height="20"/>
-                    </Button>
+
+                    <materialDesign:Badged Badge="{Binding NumberOfNotifications}" Margin="0,0,10,0" VerticalAlignment="Center" BadgeBackground="LightPink">
+                        <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges">
+                            <materialDesign:PopupBox.ToggleContent>
+
+                                <materialDesign:PackIcon Width="20" Height="20" Kind="BellOutline" />
+                            </materialDesign:PopupBox.ToggleContent>
+                            <Grid Width="400" MaxHeight="500" >
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <ListBox ItemsSource="{Binding Notifikacije}" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+
+                                    <ListBox.ItemTemplate>
+                                        
+                                        <DataTemplate>
+
+                                           
+                                                <StackPanel Width="500" VerticalAlignment="Stretch" Orientation="Horizontal"  HorizontalAlignment="Stretch" MouseLeftButtonUp="Border_MouseEnter">
+                                                <Grid >
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        <ColumnDefinition  Width="300"></ColumnDefinition>
+                                                        <ColumnDefinition Width="10"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Image Grid.Column="0" Grid.RowSpan="3" Height="50"  Margin="0,0,10,0" Source="{Binding NotifikacijaObj.ClanImage}"></Image>
+                                                    <TextBlock  Width="Auto" Grid.Column="1" Grid.Row="0" FontWeight="Bold" Text="{Binding NotifikacijaObj.Clan}"></TextBlock>
+                                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="12" Text="{Binding NotifikacijaObj.Opis}"></TextBlock>
+                                                    <TextBlock Grid.Column="1" Grid.Row="2" FontSize="9" FontWeight="Bold" Foreground="LightGray" Text="{Binding NotifikacijaObj.Datum}"></TextBlock>
+                                                    <Image Visibility="{Binding IsNew}"  HorizontalAlignment="Right" Width="10" Grid.RowSpan="3" Height="10" Grid.Column="2" Source="../Images/new.png"></Image>
+                                            </Grid>
+                                                </StackPanel>
+                                        </DataTemplate>
+                                        
+                                    </ListBox.ItemTemplate>
+
+
+
+                                </ListBox>
+                                <StackPanel  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="KeyboardArrowDown"></materialDesign:PackIcon>
+                                </StackPanel>
+
+                            </Grid>
+
+                        </materialDesign:PopupBox>
+
+                    </materialDesign:Badged>
+                  
+                    
+                   
+                 
                     <TextBlock Height="Auto" TextAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0">|</TextBlock>
-                    <Button Width="30" Click="Minimize" Height="Auto" Padding="0" Background="{x:Null}" ToolTip="Minimize" BorderBrush="{x:Null}" Foreground="Gray"  Margin="15,0,5,0">
+                    <Button Width="30" Command="{Binding CreateCommand}" Height="Auto" Padding="0" Background="{x:Null}" ToolTip="Minimize" BorderBrush="{x:Null}" Foreground="Gray"  Margin="15,0,5,0">
                         <materialDesign:PackIcon Kind="WindowMinimize"  Width="20" Height="20"   />
                     </Button>
                     <Button Width="30" Click="Maximize" x:Name="MaximizeWindowBtn" Height="Auto" Padding="0" Background="{x:Null}" ToolTip="Maximize" BorderBrush="{x:Null}" Foreground="Gray"  Margin="5,0,5,0">
@@ -61,11 +126,11 @@
         <!--Root-->
         <Grid Background="#F5F7FB" Margin="265 55 0 0">
             <Grid x:Name="G_root"  >
-              
+
 
 
             </Grid>
-            
+
         </Grid>
         <!--Side menu-->
         <Grid Width="265" HorizontalAlignment="Left"   Margin="0,0,0,0">
@@ -107,7 +172,7 @@
             <ListView ItemsSource="{Binding navlist}"  x:Name="ListViewMenu" SelectionChanged="ListViewMenu_SelectionChanged" Margin="0,81,0,-251" Foreground="White" Grid.Row="0">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
-                        
+
                         <Style.Setters >
                             <Setter Property="Height" Value="50"></Setter>
                             <Setter Property="BorderThickness" Value="0"></Setter>

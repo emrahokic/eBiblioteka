@@ -15,13 +15,11 @@ namespace eBiblioteka.WebAPI.Database
         public string Prezime { get; set; }
         public DateTime? GodinaRodjenja { get; set; }
         public DateTime? GodinaSmrti { get; set; }
-
         public string Biografija { get; set; }
-        public int? Spol { get; set; }
-
+        public int Spol { get; set; }
         public string Slika { get; set; }
         public byte[] SlikaByte { get; set; }
 
-        public virtual ICollection<KnjigaPisac> KnjigaPisac { get; set; }
+        public ICollection<KnjigaPisac> KnjigaPisac { get; set; }
     }
 }
