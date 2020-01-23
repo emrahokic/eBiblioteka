@@ -58,10 +58,23 @@ namespace eBiblioteka.DesktopWPF.ViewModels
             set
             {
                 SetProperty(ref _numberOfNotifications, value);
-                
+                NumberOfNotificationsOnIcon = NumberOfNotifications > 99 ? "99" : NumberOfNotifications.ToString();
             }
 
         }
+
+        private string _numberOfNotificationsOnIcon;
+        public string NumberOfNotificationsOnIcon
+        {
+            get { return _numberOfNotificationsOnIcon; }
+            set
+            {
+                SetProperty(ref _numberOfNotificationsOnIcon, value);
+
+            }
+
+        }
+
 
         public class InAppNotification : BindableBase
         {
@@ -114,11 +127,9 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
         HubConnection hubConnection;
         bool connected;
-        public DelegateCommand CreateCommand { get; set; }
 
         public MainWindowViewModel()
         {
-            CreateCommand = new DelegateCommand(ClickComand, CanExecute);
             FullName =  APIService.Session.ImePrezime;
             NumberOfNotifications = 0;
             navlist = new ObservableCollection<NavbarItem>();
@@ -169,6 +180,11 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
                 if (item != null)
                 {
+                    if (NumberOfNotifications == null)
+                    {
+                        NumberOfNotifications = 0;
+                    }
+
                     var x = new InAppNotification();
                     x.NotifikacijaObj.ClanImage = item.ClanImage;
                     x.NotifikacijaObj.Clan = item.Clan;
@@ -180,16 +196,15 @@ namespace eBiblioteka.DesktopWPF.ViewModels
                     NumberOfNotifications++;
 
                 }
+                myNavigation.Change(NumberOfNotificationsOnIcon);
+                ToastNotifikacija.Noti(item.Clan,item.Opis,"","Rezervacija",item.ClanImage);
             });
 
             connect();
 
         }
 
-        private void ClickComand()
-        {
-            myNavigation.Change();
-        }
+       
 
         private bool CanExecute()
         {
@@ -237,6 +252,7 @@ namespace eBiblioteka.DesktopWPF.ViewModels
                         NumberOfNotifications++;
                     }
                 }
+              myNavigation.Change(NumberOfNotificationsOnIcon);
                 
             }
 

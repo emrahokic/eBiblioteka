@@ -64,6 +64,9 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logoColored.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CachedImage, Version=0.1.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CachedImage.0.1.8.0\lib\net45\CachedImage.dll</HintPath>
@@ -294,6 +297,10 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.WindowsRuntime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5\System.Runtime.WindowsRuntime.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -357,6 +364,9 @@
     <Reference Include="Unity.Container, Version=5.10.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Container.5.10.3\lib\net47\Unity.Container.dll</HintPath>
     </Reference>
+    <Reference Include="Windows">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral\Annotated\Windows.winmd</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -374,6 +384,7 @@
     <Compile Include="Helper\EncryptionHelper.cs" />
     <Compile Include="Helper\IMyNavigation.cs" />
     <Compile Include="Helper\Stringovi.cs" />
+    <Compile Include="Helper\ToastNotifikacija.cs" />
     <Compile Include="PasswordBoxAssistant.cs" />
     <Compile Include="ViewModels\AddAuthorViewModel.cs" />
     <Compile Include="ViewModels\AddLibraryViewModel.cs" />
@@ -521,6 +532,30 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logoBooks.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logoBooks.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageSvg.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logoCube.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="iconCubeFlat.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logoColored.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />

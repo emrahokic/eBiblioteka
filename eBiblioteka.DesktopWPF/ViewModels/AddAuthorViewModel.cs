@@ -1,4 +1,5 @@
-﻿using eBiblioteka.Model.Requests;
+﻿using eBiblioteka.DesktopWPF.Helper;
+using eBiblioteka.Model.Requests;
 using Firebase.Auth;
 using Firebase.Storage;
 using Microsoft.AspNetCore.Http;
@@ -16,12 +17,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 using static eBiblioteka.Model.Gender;
 
 namespace eBiblioteka.DesktopWPF.ViewModels
 {
     public class AddAuthorViewModel : BindableBase
     {
+
+        
         #region ApiServices
 
         private readonly APIService _apiCities = new APIService("Grad");
@@ -249,12 +254,15 @@ namespace eBiblioteka.DesktopWPF.ViewModels
                 DateVisibility = Visibility.Collapsed;
                 IsDialogOpen = true;
                 DialogText = "Author is added successfuly!";
+
             }
             IsBusy = false;
             IsVisible = Visibility.Hidden;
 
-        }
 
+
+        }
+        
         private bool CanExecute()
         {
             return true;

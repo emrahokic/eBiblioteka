@@ -8,7 +8,29 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         xmlns:cachedImage="clr-namespace:CachedImage;assembly=CachedImage"
-    Title="MainWindow"  Height="770" Width="1175"   MinWidth="1000" MinHeight="750" WindowStartupLocation="CenterScreen"   WindowStyle="None" Background="#F5F7FB">
+    Title="MainWindow"  Height="770" Width="1175"  MinWidth="1000" MinHeight="750" WindowStartupLocation="CenterScreen"   WindowStyle="None" Background="#F5F7FB">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo />
+    </Window.TaskbarItemInfo>
+    <Window.Resources>
+        
+        <DataTemplate x:Key="OverlayIcon">
+            <Grid Width="20" Height="20">
+                <Ellipse Fill="#B3FFFFFF" StrokeThickness="1" Stroke="#646464"/>
+                <TextBlock Text="{Binding}"
+                        TextAlignment="Center"
+                        Foreground="Black"
+                        FontWeight="Bold"
+                        Height="16"
+                        VerticalAlignment="Center"
+                        FontSize="12">
+                   
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+
     <Grid Margin="0">
         <!--Top navigation-->
 
@@ -60,13 +82,13 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <ListBox ItemsSource="{Binding Notifikacije}" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                <ListBox ItemsSource="{Binding Notifikacije}" Grid.Row="0">
 
                                     <ListBox.ItemTemplate>
                                         
                                         <DataTemplate>
 
-                                           
+                                                
                                                 <StackPanel Width="500" VerticalAlignment="Stretch" Orientation="Horizontal"  HorizontalAlignment="Stretch" MouseLeftButtonUp="Border_MouseEnter">
                                                 <Grid >
                                                     <Grid.ColumnDefinitions>
@@ -107,7 +129,7 @@
                    
                  
                     <TextBlock Height="Auto" TextAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0">|</TextBlock>
-                    <Button Width="30" Command="{Binding CreateCommand}" Height="Auto" Padding="0" Background="{x:Null}" ToolTip="Minimize" BorderBrush="{x:Null}" Foreground="Gray"  Margin="15,0,5,0">
+                    <Button Width="30" Click="Minimize" Height="Auto" Padding="0" Background="{x:Null}" ToolTip="Minimize" BorderBrush="{x:Null}" Foreground="Gray"  Margin="15,0,5,0">
                         <materialDesign:PackIcon Kind="WindowMinimize"  Width="20" Height="20"   />
                     </Button>
                     <Button Width="30" Click="Maximize" x:Name="MaximizeWindowBtn" Height="Auto" Padding="0" Background="{x:Null}" ToolTip="Maximize" BorderBrush="{x:Null}" Foreground="Gray"  Margin="5,0,5,0">

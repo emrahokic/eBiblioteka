@@ -8,6 +8,6 @@ namespace eBiblioteka.DesktopWPF.Helper
 {
     public interface IMyNavigation
     {
-        void Change();
+        void Change(string Count);
     }
 }

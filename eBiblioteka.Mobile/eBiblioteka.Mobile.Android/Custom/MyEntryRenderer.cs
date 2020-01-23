@@ -34,6 +34,7 @@ namespace eBiblioteka.Mobile.Droid
                 Control.BackgroundTintList = ColorStateList.ValueOf(Android.Graphics.Color.White);
                 Control.SetTextColor(Android.Graphics.Color.White);
                 Control.SetHintTextColor(Resources.GetColor(Resource.Color.colorTransparent60));
+              
             }
         }
     }
