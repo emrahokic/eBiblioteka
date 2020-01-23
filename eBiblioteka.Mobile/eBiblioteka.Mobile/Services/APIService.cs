@@ -22,10 +22,10 @@ namespace eBiblioteka.Mobile.Services
         private readonly string _route;
 
 #if DEBUG
-        private string _apiUrl = "http://localhost:57049/api";
+        private string _apiUrl = "https://ebibliotekawebapi2-prod.us-west-2.elasticbeanstalk.com/api";
 #endif
 #if RELEASE
-        private string _apiUrl = "https://localhost:44360/api";
+        private string _apiUrl = "https://ebibliotekawebapi2-prod.us-west-2.elasticbeanstalk.com/api";
 
         //private string _apiUrl = "https://mywebsite.azure.com/api/";
 #endif

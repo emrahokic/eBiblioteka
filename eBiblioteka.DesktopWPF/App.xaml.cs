@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using eBiblioteka.DesktopWPF.ViewModels;
 using eBiblioteka.DesktopWPF.Views;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+
 
 namespace eBiblioteka.DesktopWPF
 {
@@ -25,7 +32,8 @@ namespace eBiblioteka.DesktopWPF
 
             
             window.ShowDialog();
-           
+            AppCenter.Start("59382f16-d319-4e25-8c4f-7b253f24f318",
+                   typeof(Analytics), typeof(Crashes));
         }
 
     }

@@ -171,8 +171,19 @@ namespace eBiblioteka.DesktopWPF.ViewModels
 
             getNotifications();
 
+            //hubConnection = new HubConnectionBuilder()
+            //    .WithUrl("http://localhost:57049/notifications", options =>
+            //    {
+            //        options.AccessTokenProvider = () => Task.FromResult(APIService.Session.JWT);
+            //    })
+            //    .WithAutomaticReconnect()
+            //    .Build();
             hubConnection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:57049/notifications")
+                .WithUrl("https://ebibliotekawebapi2-prod.us-west-2.elasticbeanstalk.com/notifications", options =>
+                {
+                    options.AccessTokenProvider = () => Task.FromResult(APIService.Session.JWT);
+                })
+                .WithAutomaticReconnect()
                 .Build();
 
             hubConnection.On<Model.Notifikacija>("SendNotification", (item) =>
@@ -252,7 +263,12 @@ namespace eBiblioteka.DesktopWPF.ViewModels
                         NumberOfNotifications++;
                     }
                 }
-              myNavigation.Change(NumberOfNotificationsOnIcon);
+                if (NumberOfNotifications == 0)
+                {
+                    NumberOfNotifications = null;
+
+                }
+                myNavigation.Change(NumberOfNotificationsOnIcon  );
                 
             }
 

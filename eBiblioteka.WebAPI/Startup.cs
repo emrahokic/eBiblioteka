@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -95,6 +96,23 @@ namespace eBiblioteka.WebAPI
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
                 };
+                x.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+
+                        // If the request is for our hub...
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments("/notifications")))
+                        {
+                            // Read the token out of the query string
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
             //services interface
@@ -107,10 +125,12 @@ namespace eBiblioteka.WebAPI
             services.AddScoped<IService<Model.Tip, Model.Tip>, TipService>();
             services.AddScoped<IKorisnikService, KorisnikService>();
             //db conection
-            var connection = Configuration.GetConnectionString("localDev");
+            //var connection = Configuration.GetConnectionString("localDev");
+            var connection = Configuration.GetConnectionString("AWS");
 
             //SignalR
             services.AddSignalR();
+            services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 
             services.AddDbContext<eBibliotekaContext>(options => options.UseSqlServer(connection));
             services.AddSpaStaticFiles(configuration =>
@@ -150,6 +170,7 @@ namespace eBiblioteka.WebAPI
 
             app.UseAuthentication();
             app.UseSignalR( c => {
+                
                 c.MapHub<SignalRHub>("/notifications");
             }
             );
@@ -166,7 +187,6 @@ namespace eBiblioteka.WebAPI
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
-
                 if (env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");

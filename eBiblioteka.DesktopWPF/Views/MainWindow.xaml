@@ -103,7 +103,7 @@
                                                     </Grid.RowDefinitions>
                                                     <Image Grid.Column="0" Grid.RowSpan="3" Height="50"  Margin="0,0,10,0" Source="{Binding NotifikacijaObj.ClanImage}"></Image>
                                                     <TextBlock  Width="Auto" Grid.Column="1" Grid.Row="0" FontWeight="Bold" Text="{Binding NotifikacijaObj.Clan}"></TextBlock>
-                                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="12" Text="{Binding NotifikacijaObj.Opis}"></TextBlock>
+                                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="12" TextWrapping="Wrap"  Text="{Binding NotifikacijaObj.Opis}"></TextBlock>
                                                     <TextBlock Grid.Column="1" Grid.Row="2" FontSize="9" FontWeight="Bold" Foreground="LightGray" Text="{Binding NotifikacijaObj.Datum}"></TextBlock>
                                                     <Image Visibility="{Binding IsNew}"  HorizontalAlignment="Right" Width="10" Grid.RowSpan="3" Height="10" Grid.Column="2" Source="../Images/new.png"></Image>
                                             </Grid>

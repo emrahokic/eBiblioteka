@@ -147,9 +147,9 @@ namespace eBiblioteka.DesktopWPF.Views
 
         private void Border_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            ListViewMenu.SelectedItem = null;
+            /*ListViewMenu.SelectedItem = null;
             G_root.Children.Clear();
-            G_root.Children.Add(new AddAuthor());
+            G_root.Children.Add(new AddAuthor());*/
             var item = (sender as StackPanel).DataContext as InAppNotification;
            
             for (int i = 0; i < _model.Notifikacije.Count; i++)

@@ -25,7 +25,7 @@ namespace eBiblioteka.DesktopWPF.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(" http://localhost:57049/api")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ebibliotekawebapi2-prod.us-west-2.elasticbeanstalk.com/api")]
         public string APIUrl {
             get {
                 return ((string)(this["APIUrl"]));

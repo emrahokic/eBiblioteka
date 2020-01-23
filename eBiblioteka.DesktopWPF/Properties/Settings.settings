@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="APIUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)"> http://localhost:57049/api</Value>
+      <Value Profile="(Default)">https://ebibliotekawebapi2-prod.us-west-2.elasticbeanstalk.com/api</Value>
     </Setting>
     <Setting Name="Element1" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

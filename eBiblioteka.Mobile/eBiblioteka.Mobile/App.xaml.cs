@@ -1,4 +1,8 @@
 ﻿using eBiblioteka.Mobile.Views;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Push;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,6 +20,9 @@ namespace eBiblioteka.Mobile
 
         protected override void OnStart()
         {
+
+            AppCenter.Start("0668f51e-af2c-48f1-98d6-2a3f832a29b2",
+                   typeof(Push));
             // Handle when your app starts
         }
 

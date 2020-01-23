@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "920858186596",
+    "firebase_url": "https://ebiblioteka2019.firebaseio.com",
+    "project_id": "ebiblioteka2019",
+    "storage_bucket": "ebiblioteka2019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920858186596:android:811dcd01b3fc3bc9f3e071",
+        "android_client_info": {
+          "package_name": "com.companyname.ebiblioteka.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920858186596-giqcol72rknctojidcjbjnob8q4vhq70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClwOq9JeJmQ6f1rYpZtbqA4sTbFURjNhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920858186596-giqcol72rknctojidcjbjnob8q4vhq70.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
